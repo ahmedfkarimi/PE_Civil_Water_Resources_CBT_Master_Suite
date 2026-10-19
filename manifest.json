@@ -2,7 +2,7 @@
   "name": "HydroPrep WRE - PE Civil Exam Master Suite",
   "short_name": "HydroPrep",
   "description": "Comprehensive NCEES April 2024 PE Civil Water Resources & Environmental CBT Exam Prep & Learning App",
-  "start_url": "./index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#1e3a8a",
   "theme_color": "#1e3a8a",
