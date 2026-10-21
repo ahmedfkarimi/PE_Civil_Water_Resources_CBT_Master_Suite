@@ -1,0 +1,930 @@
+{
+  "formulas": [
+    {
+      "name": "Single Payment Present Worth & Future Worth",
+      "eq": "P = F(1+i)<sup>-n</sup> = F(P/F, i, n); &nbsp;&nbsp; F = P(1+i)<sup>n</sup> = P(F/P, i, n)",
+      "alt": "Compound Amount Factor (F/P, i, n) = (1+i)<sup>n</sup>; Present Worth Factor (P/F, i, n) = (1+i)<sup>-n</sup>",
+      "ref": "NCEES Handbook v2.2, Section 1.3: Engineering Economics",
+      "topic": "Project Planning",
+      "notes": "End-of-period compounding convention; i is effective interest rate per period; n is total compounding periods."
+    },
+    {
+      "name": "Uniform Series Present Worth & Capital Recovery",
+      "eq": "(P/A, i, n) = <span class=\"math-frac\"><span class=\"num\">(1+i)<sup>n</sup> - 1</span><span class=\"den\">i(1+i)<sup>n</sup></span></span>; &nbsp;&nbsp; (A/P, i, n) = <span class=\"math-frac\"><span class=\"num\">i(1+i)<sup>n</sup></span><span class=\"den\">(1+i)<sup>n</sup> - 1</span></span>",
+      "alt": "Capital Recovery annualizes an initial capital expenditure over asset service life n.",
+      "ref": "NCEES Handbook v2.2, Section 1.3: Engineering Economics",
+      "topic": "Project Planning",
+      "notes": "Used for converting recurring annual O&M expenses into equivalent present worth, and amortizing capital costs."
+    },
+    {
+      "name": "Uniform Series Future Worth & Sinking Fund",
+      "eq": "(F/A, i, n) = <span class=\"math-frac\"><span class=\"num\">(1+i)<sup>n</sup> - 1</span><span class=\"den\">i</span></span>; &nbsp;&nbsp; (A/F, i, n) = <span class=\"math-frac\"><span class=\"num\">i</span><span class=\"den\">(1+i)<sup>n</sup> - 1</span></span>",
+      "alt": "A = F × (A/F, i, n); uniform annual deposit to accumulate future replacement sum F.",
+      "ref": "NCEES Handbook v2.2, Section 1.3: Engineering Economics",
+      "topic": "Project Planning",
+      "notes": "Used to size municipal reserve sinking funds for storage tank replacement or mechanical equipment rehabilitation."
+    },
+    {
+      "name": "Capitalized Cost for Perpetual Service Life",
+      "eq": "Capitalized Cost = C<sub>0</sub> + <span class=\"math-frac\"><span class=\"num\">A</span><span class=\"den\">i</span></span> + ∑ <span class=\"math-frac\"><span class=\"num\">F<sub>k</sub></span><span class=\"den\">(1+i)<sup>k</sup> - 1</span></span>",
+      "alt": "As n → ∞, (P/A, i, ∞) = <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">i</span></span>; Present Worth of perpetual annual maintenance is <span class=\"math-frac\"><span class=\"num\">A</span><span class=\"den\">i</span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 1.3: Engineering Economics",
+      "topic": "Project Planning",
+      "notes": "Applicable to permanent public civil infrastructure: dams, flood channels, aqueducts, and bridges."
+    },
+    {
+      "name": "Benefit-Cost (B/C) Ratio Analysis",
+      "eq": "Conventional B/C = <span class=\"math-frac\"><span class=\"num\">B</span><span class=\"den\">I(A/P, i, n) + O&amp;M</span></span>; &nbsp;&nbsp; Modified B/C = <span class=\"math-frac\"><span class=\"num\">B - O&amp;M</span><span class=\"den\">I(A/P, i, n)</span></span>",
+      "alt": "Project is economically justified if B/C ≥ 1.0; incremental Δ B / Δ C ≥ 1.0 governs mutually exclusive alternatives.",
+      "ref": "NCEES Handbook v2.2, Section 1.3: Engineering Economics",
+      "topic": "Project Planning",
+      "notes": "Public agency feasibility standard; B is annual equivalent benefit, I is initial investment, O&amp;M is annual operation/maintenance."
+    },
+    {
+      "name": "Critical Path Method (CPM) Float & Schedule",
+      "eq": "TF = LS - ES = LF - EF; &nbsp;&nbsp; FF = ES<sub>successor</sub> - EF",
+      "alt": "Early Finish EF = ES + Duration; Late Start LS = LF - Duration.",
+      "ref": "NCEES Handbook v2.2, Section 1.2: Construction Scheduling",
+      "topic": "Project Planning",
+      "notes": "Critical path activities have TF = 0. Delaying critical path activities directly delays project completion."
+    },
+    {
+      "name": "Soil Phase Relationships (Weight-Volume)",
+      "eq": "S · e = w · G<sub>s</sub>; &nbsp;&nbsp; n = <span class=\"math-frac\"><span class=\"num\">e</span><span class=\"den\">1+e</span></span>; &nbsp;&nbsp; gamma<sub>dry</sub> = <span class=\"math-frac\"><span class=\"num\">G<sub>s</sub> γ<sub>w</sub></span><span class=\"den\">1+e</span></span>; &nbsp;&nbsp; gamma<sub>sat</sub> = <span class=\"math-frac\"><span class=\"num\">G<sub>s</sub> + e</span><span class=\"den\">1+e</span></span> γ<sub>w</sub>",
+      "alt": "Submerged/buoyant unit weight γ' = gamma<sub>sat</sub> - γ<sub>w</sub> = <span class=\"math-frac\"><span class=\"num\">G<sub>s</sub> - 1</span><span class=\"den\">1+e</span></span> γ<sub>w.</sub>",
+      "ref": "NCEES Handbook v2.2, Section 3.1: Geotechnical - Phase Relations",
+      "topic": "Soil Mechanics",
+      "notes": "Fundamental identities linking degree of saturation S, void ratio e, moisture content w, and specific gravity G<sub>s.</sub>"
+    },
+    {
+      "name": "Effective Stress & Critical Seepage Gradient",
+      "eq": "σ' = σ - u; &nbsp;&nbsp; i<sub>crit</sub> = <span class=\"math-frac\"><span class=\"num\">γ'</span><span class=\"den\">γ<sub>w</sub></span></span> = <span class=\"math-frac\"><span class=\"num\">G<sub>s</sub> - 1</span><span class=\"den\">1+e</span></span> ≈ 1.0",
+      "alt": "Piping factor of safety FS<sub>piping</sub> = <span class=\"math-frac\"><span class=\"num\">i<sub>crit</sub></span><span class=\"den\">i<sub>exit</sub></span></span> = <span class=\"math-frac\"><span class=\"num\">i<sub>crit</sub></span><span class=\"den\">Δ h / Δ L</span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 3.1 & 4.4: Geotechnical - Effective Stress & Seepage",
+      "topic": "Soil Mechanics",
+      "notes": "When upward seepage gradient i reaches i<sub>crit</sub>, effective vertical stress drops to zero (quicksand/boiling condition)."
+    },
+    {
+      "name": "Rankine Lateral Earth Pressure Coefficients",
+      "eq": "K<sub>a</sub> = tan<sup>2</sup>(45° - <span class=\"math-frac\"><span class=\"num\">φ'</span><span class=\"den\">2</span></span>) = <span class=\"math-frac\"><span class=\"num\">1 - sinφ'</span><span class=\"den\">1 + sinφ'</span></span>; &nbsp;&nbsp; K<sub>p</sub> = tan<sup>2</sup>(45° + <span class=\"math-frac\"><span class=\"num\">φ'</span><span class=\"den\">2</span></span>) = <span class=\"math-frac\"><span class=\"num\">1 + sinφ'</span><span class=\"den\">1 - sinφ'</span></span>",
+      "alt": "At-rest coefficient (Jaky): K<sub>0</sub> = 1 - sinφ'; Total active thrust P<sub>a</sub> = <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span> K<sub>a</sub> γ H<sup>2</sup> acting at H/3 above base.",
+      "ref": "NCEES Handbook v2.2, Section 3.4: Geotechnical - Retaining Walls",
+      "topic": "Soil Mechanics",
+      "notes": "Active state requires wall outward yield; rigid unyielding basement walls must be designed for higher at-rest pressure K<sub>0.</sub>"
+    },
+    {
+      "name": "Terzaghi Bearing Capacity (Shallow Footings)",
+      "eq": "q<sub>ult</sub> = c N<sub>c</sub> s<sub>c</sub> + q N<sub>q</sub> + <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span> γ B N<sub>γ</sub> s<sub>γ</sub>; &nbsp;&nbsp; q<sub>allow</sub> = <span class=\"math-frac\"><span class=\"num\">q<sub>ult</sub></span><span class=\"den\">FS</span></span>",
+      "alt": "Square footing shape factors: s<sub>c</sub> = 1.3, s<sub>γ</sub> = 0.8 (factor 0.4); Circular: s<sub>c</sub> = 1.3, s<sub>γ</sub> = 0.6 (factor 0.3).",
+      "ref": "NCEES Handbook v2.2, Section 3.3: Geotechnical - Bearing Capacity",
+      "topic": "Soil Mechanics",
+      "notes": "Overburden surcharge q = γ D<sub>f</sub>; water table within depth B below footing base reduces soil unit weight to buoyant γ'."
+    },
+    {
+      "name": "One-Dimensional Primary Consolidation Settlement",
+      "eq": "S<sub>c</sub> = <span class=\"math-frac\"><span class=\"num\">C<sub>c</sub> H</span><span class=\"den\">1+e<sub>0</sub></span></span> log<sub>10</sub>(<span class=\"math-frac\"><span class=\"num\">σ′<sub>0</sub> + Δσ'</span><span class=\"den\">σ′<sub>0</sub></span></span>)",
+      "alt": "Overconsolidated clay with σ′<sub>0</sub> + Δσ' > σ′<sub>c</sub>: S<sub>c</sub> = <span class=\"math-frac\"><span class=\"num\">C<sub>r</sub> H</span><span class=\"den\">1+e<sub>0</sub></span></span> log<sub>10</sub>(<span class=\"math-frac\"><span class=\"num\">σ′<sub>c</sub></span><span class=\"den\">σ′<sub>0</sub></span></span>) + <span class=\"math-frac\"><span class=\"num\">C<sub>c</sub> H</span><span class=\"den\">1+e<sub>0</sub></span></span> log<sub>10</sub>(<span class=\"math-frac\"><span class=\"num\">σ′<sub>0</sub> + Δσ'</span><span class=\"den\">σ′<sub>c</sub></span></span>).",
+      "ref": "NCEES Handbook v2.2, Section 3.2: Geotechnical - Settlement",
+      "topic": "Soil Mechanics",
+      "notes": "Evaluate initial effective stress σ′<sub>0</sub> and stress increment Δσ' at mid-depth of the compressible clay stratum."
+    },
+    {
+      "name": "Rate of Consolidation & Drainage Time",
+      "eq": "t = <span class=\"math-frac\"><span class=\"num\">T<sub>v</sub> H<sub>dr</sub><sup>2</sup></span><span class=\"den\">c<sub>v</sub></span></span>; &nbsp;&nbsp; t<sub>field</sub> = t<sub>lab</sub> (<span class=\"math-frac\"><span class=\"num\">T<sub>v,field</sub></span><span class=\"den\">T<sub>v,lab</sub></span></span>) (<span class=\"math-frac\"><span class=\"num\">H<sub>dr,field</sub></span><span class=\"den\">H<sub>dr,lab</sub></span></span>)<sup>2</sup>",
+      "alt": "Time factors: T<sub>v</sub>(50%) = 0.197, T<sub>v</sub>(90%) = 0.848; Single drainage H<sub>dr</sub> = H; Double drainage H<sub>dr</sub> = H/2.",
+      "ref": "NCEES Handbook v2.2, Section 3.2: Geotechnical - Consolidation",
+      "topic": "Soil Mechanics",
+      "notes": "Consolidation time scales with the square of the maximum drainage path length H<sub>dr</sub><sup>2</sup>."
+    },
+    {
+      "name": "Soil Gradation Coefficients (USCS Classification)",
+      "eq": "C<sub>u</sub> = <span class=\"math-frac\"><span class=\"num\">D<sub>60</sub></span><span class=\"den\">D<sub>10</sub></span></span>; &nbsp;&nbsp; C<sub>c</sub> = <span class=\"math-frac\"><span class=\"num\">(D<sub>30</sub>)<sup>2</sup></span><span class=\"den\">D<sub>10</sub> D<sub>60</sub></span></span>",
+      "alt": "Well-graded gravel (GW): C<sub>u</sub> ≥ 4 and 1 ≤ C<sub>c</sub> ≤ 3; Well-graded sand (SW): C<sub>u</sub> ≥ 6 and 1 ≤ C<sub>c</sub> ≤ 3.",
+      "ref": "NCEES Handbook v2.2, Section 3.1: Geotechnical - USCS Soil Classification",
+      "topic": "Materials",
+      "notes": "Coarse-grained soils have < 50% passing No. 200 sieve; gravel vs sand split on No. 4 sieve (4.75 mm)."
+    },
+    {
+      "name": "Atterberg Limits & Plasticity Chart A-Line",
+      "eq": "PI = LL - PL; &nbsp;&nbsp; PI<sub>A-Line</sub> = 0.73(LL - 20)",
+      "alt": "Plots above A-Line are inorganic clays (C); plots below are inorganic silts (M) or organic soils (O); LL ≥ 50 indicates high plasticity (H).",
+      "ref": "NCEES Handbook v2.2, Section 3.1: Geotechnical - Atterberg Limits",
+      "topic": "Materials",
+      "notes": "Hatched dual classification zone: 4 ≤ PI ≤ 7 with LL between 12 and 29 yields CL-ML."
+    },
+    {
+      "name": "Concrete Water-Cementitious Ratio & Batch Yield",
+      "eq": "w/cm = <span class=\"math-frac\"><span class=\"num\">W<sub>water</sub></span><span class=\"den\">W<sub>cement</sub> + W<sub>pozzolan</sub></span></span>; &nbsp;&nbsp; Yield (ft<sup>3</sup>) = <span class=\"math-frac\"><span class=\"num\">∑ W<sub>batch</sub></span><span class=\"den\">gamma<sub>concrete</sub></span></span>; &nbsp;&nbsp; R<sub>y</sub> = <span class=\"math-frac\"><span class=\"num\">Yield</span><span class=\"den\">27.0 ft<sup>3</sup></span></span>",
+      "alt": "Relative yield R<sub>y</sub> > 1.00 indicates overyielding (excess batch volume); R<sub>y</sub> < 1.00 indicates underyielding.",
+      "ref": "NCEES Handbook v2.2, Section 1.5: Materials - Concrete Mix Design",
+      "topic": "Materials",
+      "notes": "Standard unit weight of normal concrete γ ≈ 145 - 150 lb/ft<sup>3</sup>; w/cm strictly governs 28-day compressive strength f′<sub>c.</sub>"
+    },
+    {
+      "name": "Thermoplastic Pipe Dimension Ratio (DR) & Pressure Class",
+      "eq": "DR = <span class=\"math-frac\"><span class=\"num\">D<sub>o</sub></span><span class=\"den\">t</span></span>; &nbsp;&nbsp; Pressure Rating (PR) = <span class=\"math-frac\"><span class=\"num\">2 · HDS</span><span class=\"den\">DR - 1</span></span> = <span class=\"math-frac\"><span class=\"num\">2 · HDS</span><span class=\"den\">(D<sub>o</sub> / t) - 1</span></span>",
+      "alt": "Barlow's hoop stress: σ = <span class=\"math-frac\"><span class=\"num\">P(D<sub>o</sub> - t)</span><span class=\"den\">2t</span></span>; Hydrostatic Design Stress HDS = HDB × Design Factor.",
+      "ref": "NCEES Handbook v2.2, Section 4.1: Closed Conduit - Piping Materials",
+      "topic": "Materials",
+      "notes": "Lower DR designates thicker wall and higher internal pressure capability (e.g. DR 14 PVC = 305 ψ; DR 18 = 235 ψ)."
+    },
+    {
+      "name": "Reinforced Concrete Pipe (RCP) D-Load Rating",
+      "eq": "Three-Edge Bearing Load (lb/linear ft) = D-Load × D<sub>inside</sub> (ft)",
+      "alt": "Bedding factor B<sub>f</sub>: Required pipe laboratory TEB = <span class=\"math-frac\"><span class=\"num\">W<sub>trench</sub></span><span class=\"den\">B<sub>f</sub></span></span>; Class B bedding B<sub>f</sub> = 1.9.",
+      "ref": "NCEES Handbook v2.2, Section 1.5: Materials - Concrete Pipe",
+      "topic": "Materials",
+      "notes": "ASTM C76 defines pipe classes by 0.01-inch crack D-load (Class III = 1,350 lb/ft/ft, Class IV = 2,000 lb/ft/ft, Class V = 3,000 lb/ft/ft)."
+    },
+    {
+      "name": "Aggregate Fineness Modulus (ASTM C33)",
+      "eq": "FM = <span class=\"math-frac\"><span class=\"num\">∑ Cumulative % Retained on Sieves No. 4, 8, 16, 30, 50, 100</span><span class=\"den\">100</span></span>",
+      "alt": "ASTM C33 specification for concrete sand requires 2.3 ≤ FM ≤ 3.1.",
+      "ref": "NCEES Handbook v2.2, Section 1.5: Materials - Aggregates",
+      "topic": "Materials",
+      "notes": "Do not include the No. 200 sieve or pan in the Fineness Modulus calculation; higher FM denotes coarser sand."
+    },
+    {
+      "name": "Fluid Junction Mass Balance & Complete Mixing",
+      "eq": "Q<sub>down</sub> C<sub>down</sub> = ∑ Q<sub>i</sub> C<sub>i</sub> ⇒ C<sub>down</sub> = <span class=\"math-frac\"><span class=\"num\">Q<sub>stream</sub> C<sub>stream</sub> + Q<sub>eff</sub> C<sub>eff</sub></span><span class=\"den\">Q<sub>stream</sub> + Q<sub>eff</sub></span></span>",
+      "alt": "Steady-state conservative constituent balance across fluid mixing nodes; total mass flux is conserved.",
+      "ref": "NCEES Handbook v2.2, Section 4.5: Environmental - Complete Mixing",
+      "topic": "Analysis and Design",
+      "notes": "Total downstream discharge Q<sub>down</sub> = Q<sub>stream</sub> + Q<sub>eff</sub>; forgetting to add effluent discharge causes major error."
+    },
+    {
+      "name": "Clarifier Hydraulic Surface Overflow Rate (SOR)",
+      "eq": "SOR = <span class=\"math-frac\"><span class=\"num\">Q</span><span class=\"den\">A<sub>plan</sub></span></span> = <span class=\"math-frac\"><span class=\"num\">Q</span><span class=\"den\"><span class=\"math-frac\"><span class=\"num\">π D<sup>2</sup></span><span class=\"den\">4</span></span></span></span> [gpd/ft<sup>2</sup>]",
+      "alt": "Particles with settling velocity v<sub>s</sub> ≥ SOR achieve 100% capture; side water depth governs detention time, not SOR.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Wastewater - Primary Clarifiers",
+      "topic": "Analysis and Design",
+      "notes": "Typical primary clarifier design values: SOR = 800 - 1,200 gpd/ft<sup>2</sup>; secondary clarifiers: 400 - 800 gpd/ft<sup>2</sup>."
+    },
+    {
+      "name": "Secondary Clarifier Solids Loading Rate (SLR)",
+      "eq": "SLR = <span class=\"math-frac\"><span class=\"num\">Applied Solids (lb/day)</span><span class=\"den\">A<sub>plan</sub></span></span> = <span class=\"math-frac\"><span class=\"num\">(Q + Q<sub>r</sub>) × MLSS × 8.34</span><span class=\"den\">A<sub>plan</sub></span></span> [lb/day/ft<sup>2</sup>]",
+      "alt": "State point underflow concentration: C<sub>u</sub> = <span class=\"math-frac\"><span class=\"num\">Q + Q<sub>r</sub></span><span class=\"den\">Q<sub>r</sub></span></span> MLSS = <span class=\"math-frac\"><span class=\"num\">1+r</span><span class=\"den\">r</span></span> MLSS, where r = Q<sub>r</sub> / Q.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Wastewater - Secondary Clarifiers",
+      "topic": "Analysis and Design",
+      "notes": "Applied solids to secondary clarifiers MUST include both forward plant flow Q and return activated sludge recycle flow Q<sub>r.</sub>"
+    },
+    {
+      "name": "Triangular 90° V-Notch Weir Flow Measurement",
+      "eq": "Q = 2.50 H<sup>2.5</sup> (USCS: Q in cfs, H in feet) | Q = 1.38 H<sup>2.5</sup> (SI: Q in m<sup>3</sup>/s, H in meters)",
+      "alt": "General angle θ: Q = <span class=\"math-frac\"><span class=\"num\">8</span><span class=\"den\">15</span></span> C<sub>d</sub> <span class=\"math-sqrt\">√<span class=\"radicand\">2g</span></span> tan(<span class=\"math-frac\"><span class=\"num\">θ</span><span class=\"den\">2</span></span>) H<sup>2.5</sup>.",
+      "ref": "NCEES Handbook v2.2, Section 4.2: Open Channel - Weirs",
+      "topic": "Analysis and Design",
+      "notes": "V-notch weirs maintain high flow measurement precision across a wide dynamic discharge range due to proportional contraction."
+    },
+    {
+      "name": "Rectangular Suppressed & Contracted Weirs (Francis)",
+      "eq": "Q = 3.33 (L - 0.1 n H) H<sup>1.5</sup> (USCS units: Q in cfs, L, H in ft)",
+      "alt": "Suppressed weir (n = 0, no end contractions): Q = 3.33 L H<sup>1.5</sup>; Two end contractions (n = 2): Q = 3.33 (L - 0.2H) H<sup>1.5</sup>.",
+      "ref": "NCEES Handbook v2.2, Section 4.2: Open Channel - Weirs",
+      "topic": "Analysis and Design",
+      "notes": "Head H must be measured at least 4H upstream of the weir crest to avoid the water surface drawdown curve."
+    },
+    {
+      "name": "Flocculation Velocity Gradient (G) & Camp Number",
+      "eq": "G = <span class=\"math-sqrt\">√<span class=\"radicand\"><span class=\"math-frac\"><span class=\"num\">P</span><span class=\"den\">μ V</span></span></span></span>; &nbsp;&nbsp; Camp-Stein Dimensionless Number = G · t = G (<span class=\"math-frac\"><span class=\"num\">V</span><span class=\"den\">Q</span></span>)",
+      "alt": "P = 550 × HP in USCS (\text{ft} · lb/s); Camp number G · t represents total particle collision opportunity.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Water Treatment - Flocculation",
+      "topic": "Analysis and Design",
+      "notes": "Typical water treatment targets: G = 20 - 70 s<sup>-1</sup>; Camp number G · t = 10<sup>4</sup> - 10<sup>5</sup>; excessive G shears floc."
+    },
+    {
+      "name": "Darcy-Weisbach Energy Loss Equation",
+      "eq": "h<sub>f</sub> = f (<span class=\"math-frac\"><span class=\"num\">L</span><span class=\"den\">D</span></span>) <span class=\"math-frac\"><span class=\"num\">V<sup>2</sup></span><span class=\"den\">2g</span></span> = <span class=\"math-frac\"><span class=\"num\">8 f L</span><span class=\"den\">π<sup>2</sup> g D<sup>5</sup></span></span> Q<sup>2</sup>; &nbsp;&nbsp; h<sub>m</sub> = ∑ K <span class=\"math-frac\"><span class=\"num\">V<sup>2</sup></span><span class=\"den\">2g</span></span>",
+      "alt": "Total head loss h<sub>L</sub> = h<sub>f</sub> + h<sub>m</sub>; Laminar regime (Re < 2,000): f = <span class=\"math-frac\"><span class=\"num\">64</span><span class=\"den\">Re</span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 4.1: Closed Conduit - Friction Loss",
+      "topic": "Hydraulics-Closed Conduit",
+      "notes": "Universal theoretical equation for any Newtonian fluid; valid for laminar, transitional, and turbulent flow regimes."
+    },
+    {
+      "name": "Swamee-Jain Explicit Friction Factor Equation",
+      "eq": "f = <span class=\"math-frac\"><span class=\"num\">0.25</span><span class=\"den\">[log<sub>10</sub>(<span class=\"math-frac\"><span class=\"num\">ε</span><span class=\"den\">3.7D</span></span> + <span class=\"math-frac\"><span class=\"num\">5.74</span><span class=\"den\">Re<sup>0.9</sup></span></span>)]<sup>2</sup></span></span>",
+      "alt": "Explicit approximation of the implicit Colebrook equation; agrees within 1% over 5,000 ≤ Re ≤ 10<sup>8</sup> and 10<sup>-6</sup> ≤ ε/D ≤ 10<sup>-2</sup>.",
+      "ref": "NCEES Handbook v2.2, Section 4.1: Closed Conduit - Darcy-Weisbach",
+      "topic": "Hydraulics-Closed Conduit",
+      "notes": "Ensure common logarithm (log<sub>10</sub>) is used, NOT natural log (ln); eliminate iterative Moody diagram hunting."
+    },
+    {
+      "name": "Hazen-Williams Pipe Friction Loss (USCS units)",
+      "eq": "h<sub>f</sub> = <span class=\"math-frac\"><span class=\"num\">10.44 L Q<sup>1.852</sup></span><span class=\"den\">C<sup>1.852</sup> d<sup>4.87</sup></span></span> [Q in gpm, d in inches, L in ft]; &nbsp;&nbsp; h<sub>f</sub> = <span class=\"math-frac\"><span class=\"num\">4.73 L Q<sup>1.852</sup></span><span class=\"den\">C<sup>1.852</sup> D<sup>4.87</sup></span></span> [Q in cfs, D in ft]",
+      "alt": "Flow velocity: V = 1.318 C R<sub>h</sub><sup>0.63</sup> S<sup>0.54</sup> (ft/s units); C = 140 - 150 for PVC/HDPE; C = 100 for older unlined cast iron.",
+      "ref": "NCEES Handbook v2.2, Section 4.1: Closed Conduit - Hazen-Williams",
+      "topic": "Hydraulics-Closed Conduit",
+      "notes": "Empirical formula applicable strictly to water flow at normal ambient temperatures (60°F); lower C means rougher pipe."
+    },
+    {
+      "name": "Total Dynamic Head & Pump Power",
+      "eq": "TDH = h<sub>static</sub> + h<sub>f</sub> + h<sub>m</sub>; &nbsp;&nbsp; WHP = <span class=\"math-frac\"><span class=\"num\">Q · TDH · SG</span><span class=\"den\">3,960</span></span>; &nbsp;&nbsp; Motor HP = <span class=\"math-frac\"><span class=\"num\">WHP</span><span class=\"den\">eta<sub>pump</sub> eta<sub>motor</sub></span></span>",
+      "alt": "Brake Horsepower BHP = <span class=\"math-frac\"><span class=\"num\">WHP</span><span class=\"den\">eta<sub>pump</sub></span></span>; Combined wire-to-water efficiency eta<sub>total</sub> = eta<sub>pump</sub> × eta<sub>motor</sub>.",
+      "ref": "NCEES Handbook v2.2, Section 4.1: Closed Conduit - Pumps",
+      "topic": "Hydraulics-Closed Conduit",
+      "notes": "Q in gpm, TDH in ft; 3,960 conversion constant arises from (33,000 ft · lb/min/hp) / 8.34 lb/gal."
+    },
+    {
+      "name": "Pump Affinity Laws (Speed & Diameter Scaling)",
+      "eq": "<span class=\"math-frac\"><span class=\"num\">Q<sub>2</sub></span><span class=\"den\">Q<sub>1</sub></span></span> = <span class=\"math-frac\"><span class=\"num\">N<sub>2</sub></span><span class=\"den\">N<sub>1</sub></span></span> (<span class=\"math-frac\"><span class=\"num\">D<sub>2</sub></span><span class=\"den\">D<sub>1</sub></span></span>); &nbsp;&nbsp; <span class=\"math-frac\"><span class=\"num\">H<sub>2</sub></span><span class=\"den\">H<sub>1</sub></span></span> = (<span class=\"math-frac\"><span class=\"num\">N<sub>2</sub></span><span class=\"den\">N<sub>1</sub></span></span>)<sup>2</sup> (<span class=\"math-frac\"><span class=\"num\">D<sub>2</sub></span><span class=\"den\">D<sub>1</sub></span></span>)<sup>2</sup>; &nbsp;&nbsp; <span class=\"math-frac\"><span class=\"num\">P<sub>2</sub></span><span class=\"den\">P<sub>1</sub></span></span> = (<span class=\"math-frac\"><span class=\"num\">N<sub>2</sub></span><span class=\"den\">N<sub>1</sub></span></span>)<sup>3</sup> (<span class=\"math-frac\"><span class=\"num\">D<sub>2</sub></span><span class=\"den\">D<sub>1</sub></span></span>)<sup>3</sup>",
+      "alt": "Impeller trim at constant rpm: Q ∝ D, H ∝ D<sup>2</sup>, BHP ∝ D<sup>3</sup>; VFD speed control at constant diameter: Q ∝ N, H ∝ N<sup>2</sup>, BHP ∝ N<sup>3</sup>.",
+      "ref": "NCEES Handbook v2.2, Section 4.1: Closed Conduit - Affinity Laws",
+      "topic": "Hydraulics-Closed Conduit",
+      "notes": "Power scales with the CUBE of speed or diameter; small changes in impeller diameter or speed dramatically shift power demand."
+    },
+    {
+      "name": "Net Positive Suction Head Available (NPSHa)",
+      "eq": "NPSH<sub>a</sub> = <span class=\"math-frac\"><span class=\"num\">P<sub>atm</sub></span><span class=\"den\">γ</span></span> ± z<sub>s</sub> - h<sub>fs</sub> - <span class=\"math-frac\"><span class=\"num\">P<sub>vp</sub></span><span class=\"den\">γ</span></span>",
+      "alt": "Cavitation occurs when NPSH<sub>a</sub> < NPSH<sub>r</sub>; Thoma cavitation parameter σ = <span class=\"math-frac\"><span class=\"num\">NPSH<sub>r</sub></span><span class=\"den\">H<sub>total</sub></span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 4.1: Closed Conduit - Pumps",
+      "topic": "Hydraulics-Closed Conduit",
+      "notes": "Suction lift: static head z<sub>s</sub> is subtracted when reservoir water surface is BELOW pump centerline; added for flooded suction."
+    },
+    {
+      "name": "Joukowsky Water Hammer Pressure Surge",
+      "eq": "Δ H = <span class=\"math-frac\"><span class=\"num\">a Δ V</span><span class=\"den\">g</span></span>; &nbsp;&nbsp; Δ P = <span class=\"math-frac\"><span class=\"num\">γ Δ H</span><span class=\"den\">144</span></span> = <span class=\"math-frac\"><span class=\"num\">ρ a Δ V</span><span class=\"den\">144</span></span>; &nbsp;&nbsp; t<sub>c</sub> = <span class=\"math-frac\"><span class=\"num\">2L</span><span class=\"den\">a</span></span>",
+      "alt": "Wave speed: a = <span class=\"math-sqrt\">√<span class=\"radicand\"><span class=\"math-frac\"><span class=\"num\">K/ρ</span><span class=\"den\">1 + (K/E)(D/t)</span></span></span></span>; rapid valve closure occurs when closing time t ≤ t<sub>c</sub> = 2L/a.",
+      "ref": "NCEES Handbook v2.2, Section 4.1: Closed Conduit - Water Hammer",
+      "topic": "Hydraulics-Closed Conduit",
+      "notes": "Rapid valve closure halts fluid momentum, generating maximum acoustic pressure rise; slow closure (t > 2L/a) reduces surge."
+    },
+    {
+      "name": "Manning's Equation for Uniform Gravity Flow",
+      "eq": "Q = <span class=\"math-frac\"><span class=\"num\">1.486</span><span class=\"den\">n</span></span> A R<sub>h</sub><sup>2/3</sup> S<sub>0</sub><sup>1/2</sup> (USCS) | Q = <span class=\"math-frac\"><span class=\"num\">1.0</span><span class=\"den\">n</span></span> A R<sub>h</sub><sup>2/3</sup> S<sub>0</sub><sup>1/2</sup> (SI)",
+      "alt": "Hydraulic radius R<sub>h</sub> = A / P; Trapezoid area A = (b + zy)y; Wetted perimeter P = b + 2y<span class=\"math-sqrt\">√<span class=\"radicand\">1+z<sup>2</sup></span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 4.2: Open Channel Hydraulics",
+      "topic": "Hydraulics-Open Channel",
+      "notes": "In USCS units, the 1.486 conversion factor (1.4859 = 1 m<sup>1/3</sup>/ft<sup>1/3</sup>) is mandatory; for full circular pipe R<sub>h</sub> = D/4."
+    },
+    {
+      "name": "Critical Depth & Minimum Specific Energy (Rectangular)",
+      "eq": "y<sub>c</sub> = (<span class=\"math-frac\"><span class=\"num\">q<sup>2</sup></span><span class=\"den\">g</span></span>)<sup>1/3</sup> = [<span class=\"math-frac\"><span class=\"num\">(Q/b)<sup>2</sup></span><span class=\"den\">g</span></span>]<sup>1/3</sup>; &nbsp;&nbsp; E<sub>min</sub> = 1.5 y<sub>c</sub>",
+      "alt": "Froude number Fr = <span class=\"math-frac\"><span class=\"num\">V</span><span class=\"den\"><span class=\"math-sqrt\">√<span class=\"radicand\">g D<sub>h</sub></span></span></span></span>; Fr < 1 Subcritical (tranquil); Fr = 1 Critical; Fr > 1 Supercritical (rapid).",
+      "ref": "NCEES Handbook v2.2, Section 4.2: Open Channel - Critical Flow",
+      "topic": "Hydraulics-Open Channel",
+      "notes": "The minimum specific energy relation E<sub>min</sub> = 1.5 y<sub>c</sub> is strictly valid ONLY for rectangular cross sections."
+    },
+    {
+      "name": "General Critical Flow Criterion (Non-Rectangular Sections)",
+      "eq": "<span class=\"math-frac\"><span class=\"num\">Q<sup>2</sup> T</span><span class=\"den\">g A<sup>3</sup></span></span> = 1 ⇒ <span class=\"math-frac\"><span class=\"num\">V<sup>2</sup></span><span class=\"den\">2g</span></span> = <span class=\"math-frac\"><span class=\"num\">D<sub>h</sub></span><span class=\"den\">2</span></span>",
+      "alt": "Hydraulic depth D<sub>h</sub> = A / T, where T is top water surface width; Triangular channel (zH:1V): y<sub>c</sub> = (<span class=\"math-frac\"><span class=\"num\">2Q<sup>2</sup></span><span class=\"den\">g z<sup>2</sup></span></span>)<sup>1/5</sup>.",
+      "ref": "NCEES Handbook v2.2, Section 4.2: Open Channel - Critical Flow",
+      "topic": "Hydraulics-Open Channel",
+      "notes": "Governing condition for critical flow in trapezoidal, triangular, circular, or irregular natural river channels."
+    },
+    {
+      "name": "Hydraulic Jump Sequent Depths & Energy Dissipation",
+      "eq": "<span class=\"math-frac\"><span class=\"num\">y<sub>2</sub></span><span class=\"den\">y<sub>1</sub></span></span> = <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span> [<span class=\"math-sqrt\">√<span class=\"radicand\">1 + 8 Fr<sub>1</sub><sup>2</sup></span></span> - 1]; &nbsp;&nbsp; Δ E = <span class=\"math-frac\"><span class=\"num\">(y<sub>2</sub> - y<sub>1</sub>)<sup>3</sup></span><span class=\"den\">4 y<sub>1</sub> y<sub>2</sub></span></span>",
+      "alt": "Specific force is conserved (M<sub>1</sub> = M<sub>2</sub>); Jump length on horizontal apron: L<sub>j</sub> ≈ 6 y<sub>2</sub> for Fr<sub>1</sub> = 4.5 - 9.0.",
+      "ref": "NCEES Handbook v2.2, Section 4.2: Open Channel - Hydraulic Jump",
+      "topic": "Hydraulics-Open Channel",
+      "notes": "Hydraulic jump transitions abruptly from supercritical (Fr<sub>1</sub> > 1) to subcritical (Fr<sub>2</sub> < 1); Sequent depths have unequal energies."
+    },
+    {
+      "name": "Circular Conduit Partial Flow Elements (Manning)",
+      "eq": "<span class=\"math-frac\"><span class=\"num\">d</span><span class=\"den\">D</span></span> = 0.50 ⇒ R<sub>h</sub> = <span class=\"math-frac\"><span class=\"num\">D</span><span class=\"den\">4</span></span>, &nbsp;&nbsp; A = 0.5 A<sub>full</sub>",
+      "alt": "Maximum discharge occurs at d/D ≈ 0.938 (Q = 1.075 Q<sub>full</sub>); Maximum velocity occurs at d/D ≈ 0.81 (V = 1.14 V<sub>full</sub>).",
+      "ref": "NCEES Handbook v2.2, Section 4.2: Open Channel - Circular Sections",
+      "topic": "Hydraulics-Open Channel",
+      "notes": "A pipe flowing full carries LESS flow than a pipe flowing at 94% depth due to crown friction."
+    },
+    {
+      "name": "Roadside Gutter Spread (HEC-22 Manning Modified)",
+      "eq": "Q = <span class=\"math-frac\"><span class=\"num\">0.56</span><span class=\"den\">n</span></span> S<sub>x</sub><sup>1.67</sup> S<sub>L</sub><sup>0.5</sup> T<sup>2.67</sup> ⇒ T = [<span class=\"math-frac\"><span class=\"num\">Q · n</span><span class=\"den\">0.56 S<sub>x</sub><sup>1.67</sup> S<sub>L</sub><sup>0.5</sup></span></span>]<sup>0.375</sup>",
+      "alt": "Gutter cross-slope S<sub>x</sub> (ft/ft), longitudinal grade S<sub>L</sub> (ft/ft), spread width T (ft); Curb inlet capture efficiency: E = 1 - (1 - L/L<sub>T</sub>)<sup>1.8</sup>.",
+      "ref": "NCEES Handbook v2.2, Section 4.2: Open Channel - Pavement Drainage (HEC-22)",
+      "topic": "Hydraulics-Open Channel",
+      "notes": "Cross slope S<sub>x</sub> must be entered in dimensionless ft/ft (2% = 0.02), NOT whole percent; sizes allowable street flooding."
+    },
+    {
+      "name": "Rational Method Peak Runoff Discharge",
+      "eq": "Q<sub>p</sub> = C<sub>f</sub> · C · I · A [cfs ≈ acre-in/hr]",
+      "alt": "Composite runoff coefficient: C<sub>comp</sub> = <span class=\"math-frac\"><span class=\"num\">∑ C<sub>i</sub> A<sub>i</sub></span><span class=\"den\">A<sub>total</sub></span></span>; Frequency factor C<sub>f</sub> = 1.0 ( ≤ 10-yr), 1.1 (25-yr), 1.2 (50-yr), 1.25 (100-yr).",
+      "ref": "NCEES Handbook v2.2, Section 4.3: Hydrology - Rational Method",
+      "topic": "Hydrology",
+      "notes": "Valid for small drainage basins (A ≤ 200 acres); rainfall intensity I is evaluated at storm duration equal to time of concentration t<sub>d</sub> = t<sub>c.</sub>"
+    },
+    {
+      "name": "NRCS (SCS) Runoff Curve Number Equation",
+      "eq": "Q = <span class=\"math-frac\"><span class=\"num\">(P - 0.2S)<sup>2</sup></span><span class=\"den\">P + 0.8S</span></span>; &nbsp;&nbsp; S = <span class=\"math-frac\"><span class=\"num\">1,000</span><span class=\"den\">CN</span></span> - 10",
+      "alt": "Initial abstraction I<sub>a</sub> = 0.2S; Runoff occurs only when P > 0.2S; Total runoff volume Vol (ac-ft) = <span class=\"math-frac\"><span class=\"num\">Q (in) × A (acres)</span><span class=\"den\">12</span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 4.3: Hydrology - SCS Method",
+      "topic": "Hydrology",
+      "notes": "Rainfall P and soil potential maximum retention S are in inches; CN integrates soil group (A, B, C, D), land cover, and moisture."
+    },
+    {
+      "name": "Time of Concentration (NRCS Sheet Flow & Kirpich)",
+      "eq": "T<sub>t,sheet</sub> = <span class=\"math-frac\"><span class=\"num\">0.007(n L)<sup>0.8</sup></span><span class=\"den\">P<sub>2</sub><sup>0.5</sup> S<sup>0.4</sup></span></span> (hr); &nbsp;&nbsp; t<sub>c,Kirpich</sub> = 0.0078 L<sup>0.77</sup> S<sup>-0.385</sup> (min)",
+      "alt": "Total time of concentration: t<sub>c</sub> = T<sub>sheet</sub> + T<sub>shallow concentrated</sub> + T<sub>channel flow</sub>; TR-55 limits sheet flow length L ≤ 100 ft.",
+      "ref": "NCEES Handbook v2.2, Section 4.3: Hydrology - Time of Concentration",
+      "topic": "Hydrology",
+      "notes": "In Kirpich formula, L is flow path length in feet, S is channel slope in ft/ft (dimensionless)."
+    },
+    {
+      "name": "NRCS Dimensionless Unit Hydrograph Peak Rate",
+      "eq": "Q<sub>p</sub> = <span class=\"math-frac\"><span class=\"num\">484 A Q<sub>excess</sub></span><span class=\"den\">t<sub>p</sub></span></span>; &nbsp;&nbsp; t<sub>p</sub> = <span class=\"math-frac\"><span class=\"num\">D</span><span class=\"den\">2</span></span> + 0.6 t<sub>c</sub>",
+      "alt": "Time to peak t<sub>p</sub> in hours, watershed area A in square miles, excess runoff Q<sub>excess</sub> = 1.0 inch; Standard shape factor = 484.",
+      "ref": "NCEES Handbook v2.2, Section 4.3: Hydrology - Unit Hydrographs",
+      "topic": "Hydrology",
+      "notes": "Shape factor reduces to 284 in flat coastal plains and increases to 600 in steep mountainous catchments."
+    },
+    {
+      "name": "Muskingum River Reach Flood Routing",
+      "eq": "O<sub>2</sub> = C<sub>0</sub> I<sub>2</sub> + C<sub>1</sub> I<sub>1</sub> + C<sub>2</sub> O<sub>1</sub>; &nbsp;&nbsp; C<sub>0</sub> + C<sub>1</sub> + C<sub>2</sub> = 1.0",
+      "alt": "C<sub>0</sub> = <span class=\"math-frac\"><span class=\"num\">Δ t - 2KX</span><span class=\"den\">2K(1-X) + Δ t</span></span>; C<sub>1</sub> = <span class=\"math-frac\"><span class=\"num\">Δ t + 2KX</span><span class=\"den\">2K(1-X) + Δ t</span></span>; C<sub>2</sub> = <span class=\"math-frac\"><span class=\"num\">2K(1-X) - Δ t</span><span class=\"den\">2K(1-X) + Δ t</span></span>; routing stability: 2KX < Δ t ≤ K.",
+      "ref": "NCEES Handbook v2.2, Section 4.3: Hydrology - Flood Routing",
+      "topic": "Hydrology",
+      "notes": "K is reach travel time (storage parameter), X is wedge weighting factor (0 ≤ X ≤ 0.5; natural streams X ≈ 0.1 - 0.3)."
+    },
+    {
+      "name": "Water Quality Volume (WQv) & Flood Risk Probability",
+      "eq": "WQ<sub>v</sub> = <span class=\"math-frac\"><span class=\"num\">P · R<sub>v</sub> · A</span><span class=\"den\">12</span></span> (ac-ft); &nbsp;&nbsp; R<sub>v</sub> = 0.05 + 0.009 I; &nbsp;&nbsp; Risk = 1 - (1 - <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">T</span></span>)<sup>n</sup>",
+      "alt": "Annual exceedance probability p = 1/T; Schueler volumetric runoff coefficient R<sub>v</sub> uses percent site imperviousness I (0 - 100%).",
+      "ref": "NCEES Handbook v2.2, Section 4.3: Hydrology - Stormwater Quality & Frequency",
+      "topic": "Hydrology",
+      "notes": "Risk is the binomial probability of equaling or exceeding the T-year event at least once in an n-year design bond period."
+    },
+    {
+      "name": "Darcy's Law & Actual Pore Seepage Velocity",
+      "eq": "Q = K i A = K (<span class=\"math-frac\"><span class=\"num\">Δ h</span><span class=\"den\">L</span></span>) A; &nbsp;&nbsp; v = K i; &nbsp;&nbsp; v<sub>s</sub> = <span class=\"math-frac\"><span class=\"num\">v</span><span class=\"den\">n<sub>e</sub></span></span> = <span class=\"math-frac\"><span class=\"num\">K i</span><span class=\"den\">n<sub>e</sub></span></span>",
+      "alt": "Darcy velocity v is apparent superficial discharge velocity; actual advective seepage velocity v<sub>s</sub> through interconnected pores is v/n<sub>e.</sub>",
+      "ref": "NCEES Handbook v2.2, Section 4.4: Groundwater Flow",
+      "topic": "Groundwater and Wells",
+      "notes": "Contaminant travel time and tracer velocity must ALWAYS be computed using true seepage velocity v<sub>s</sub>, never Darcy velocity v."
+    },
+    {
+      "name": "Thiem Equation (Confined Aquifer Steady Radial Flow)",
+      "eq": "T = K b = <span class=\"math-frac\"><span class=\"num\">Q ln(r<sub>2</sub> / r<sub>1</sub>)</span><span class=\"den\">2 π (s<sub>1</sub> - s<sub>2</sub>)</span></span>",
+      "alt": "Drawdown relation: s<sub>1</sub> - s<sub>2</sub> = <span class=\"math-frac\"><span class=\"num\">Q</span><span class=\"den\">2 π T</span></span> ln(<span class=\"math-frac\"><span class=\"num\">r<sub>2</sub></span><span class=\"den\">r<sub>1</sub></span></span>); observation wells at radial distances r<sub>1</sub> and r<sub>2</sub> with drawdowns s<sub>1</sub> and s<sub>2.</sub>",
+      "ref": "NCEES Handbook v2.2, Section 4.4: Groundwater - Well Hydraulics",
+      "topic": "Groundwater and Wells",
+      "notes": "Confined aquifer thickness b remains fully saturated and constant; piezometric surface remains above top confining bed."
+    },
+    {
+      "name": "Dupuit Equation (Unconfined Aquifer Radial Flow)",
+      "eq": "K = <span class=\"math-frac\"><span class=\"num\">Q ln(r<sub>2</sub> / r<sub>1</sub>)</span><span class=\"den\">π (h<sub>2</sub><sup>2</sup> - h<sub>1</sub><sup>2</sup>)</span></span> ⇒ Q = <span class=\"math-frac\"><span class=\"num\">π K (h<sub>2</sub><sup>2</sup> - h<sub>1</sub><sup>2</sup>)</span><span class=\"den\">ln(r<sub>2</sub> / r<sub>1</sub>)</span></span>",
+      "alt": "At well casing (r = r<sub>w</sub>, h = h<sub>w</sub>) and outer radius of influence (r = R, h = H<sub>0</sub>): Q = <span class=\"math-frac\"><span class=\"num\">π K (H<sub>0</sub><sup>2</sup> - h<sub>w</sub><sup>2</sup>)</span><span class=\"den\">ln(R / r<sub>w</sub>)</span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 4.4: Groundwater - Unconfined Well Flow",
+      "topic": "Groundwater and Wells",
+      "notes": "Unconfined flow involves a sloping phreatic water table where flow area shrinks toward the wellbore; heads are SQUARED."
+    },
+    {
+      "name": "Theis & Cooper-Jacob Transient Well Equations",
+      "eq": "s = <span class=\"math-frac\"><span class=\"num\">Q</span><span class=\"den\">4 π T</span></span> W(u); &nbsp;&nbsp; u = <span class=\"math-frac\"><span class=\"num\">r<sup>2</sup> S</span><span class=\"den\">4 T t</span></span>; &nbsp;&nbsp; s = <span class=\"math-frac\"><span class=\"num\">Q</span><span class=\"den\">4 π T</span></span> ln(<span class=\"math-frac\"><span class=\"num\">2.25 T t</span><span class=\"den\">r<sup>2</sup> S</span></span>) [for u < 0.05]",
+      "alt": "Cooper-Jacob base-10: s = <span class=\"math-frac\"><span class=\"num\">2.303 Q</span><span class=\"den\">4 π T</span></span> log<sub>10</sub>(<span class=\"math-frac\"><span class=\"num\">2.25 T t</span><span class=\"den\">r<sup>2</sup> S</span></span>); Transmissivity T = <span class=\"math-frac\"><span class=\"num\">2.303 Q</span><span class=\"den\">4 π Δ s</span></span> per log cycle.",
+      "ref": "NCEES Handbook v2.2, Section 4.4: Groundwater - Transient Well Flow",
+      "topic": "Groundwater and Wells",
+      "notes": "Non-equilibrium well equations quantify drawdown cone development over pumping time t in confined aquifers."
+    },
+    {
+      "name": "2D Seepage Flow Net & Dam Seepage Rate",
+      "eq": "q = K H (<span class=\"math-frac\"><span class=\"num\">N<sub>f</sub></span><span class=\"den\">N<sub>d</sub></span></span>) [ft<sup>3</sup>/(s · ft)]; &nbsp;&nbsp; Δ h = <span class=\"math-frac\"><span class=\"num\">H</span><span class=\"den\">N<sub>d</sub></span></span>",
+      "alt": "Shape factor = N<sub>f</sub> / N<sub>d</sub>; Anisotropic hydraulic conductivity transformed coordinate equivalent: K' = <span class=\"math-sqrt\">√<span class=\"radicand\">K<sub>h</sub> K<sub>v</sub></span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 4.4: Groundwater - Seepage & Flow Nets",
+      "topic": "Groundwater and Wells",
+      "notes": "H is the total differential head loss between upstream and downstream pools (H = H<sub>up</sub> - H<sub>down</sub>), not pool elevation."
+    },
+    {
+      "name": "Ghyben-Herzberg Coastal Saltwater Intrusion",
+      "eq": "z = (<span class=\"math-frac\"><span class=\"num\">ρ<sub>f</sub></span><span class=\"den\">ρ<sub>s</sub> - ρ<sub>f</sub></span></span>) h<sub>f</sub> = (<span class=\"math-frac\"><span class=\"num\">1.000</span><span class=\"den\">1.025 - 1.000</span></span>) h<sub>f</sub> = 40 h<sub>f</sub>",
+      "alt": "Total freshwater thickness above impermeable base = h<sub>f</sub> + z = 41 h<sub>f</sub>; every 1.0 ft of water table decline causes 40 ft of saltwater upconing.",
+      "ref": "NCEES Handbook v2.2, Section 4.4: Groundwater - Saltwater Intrusion",
+      "topic": "Groundwater and Wells",
+      "notes": "Hydrostatic equilibrium principle between immiscible freshwater and denser seawater (\rho<sub>s</sub> = 1.025 g/cm<sup>3</sup>)."
+    },
+    {
+      "name": "Streeter-Phelps Dissolved Oxygen Sag Equation",
+      "eq": "D(t) = <span class=\"math-frac\"><span class=\"num\">k<sub>d</sub> L<sub>0</sub></span><span class=\"den\">k<sub>r</sub> - k<sub>d</sub></span></span> (e<sup>-k<sub>d</sub> t</sup> - e<sup>-k<sub>r</sub> t</sup>) + D<sub>0</sub> e<sup>-k<sub>r</sub> t</sup>; &nbsp;&nbsp; DO(t) = DO<sub>sat</sub> - D(t)",
+      "alt": "Oxygen deficit D = DO<sub>sat</sub> - DO; k<sub>d</sub> is deoxygenation rate, k<sub>r</sub> is atmospheric reaeration rate (base e, day<sup>-1</sup>).",
+      "ref": "NCEES Handbook v2.2, Section 4.5: Environmental - Oxygen Sag Model",
+      "topic": "Surface Water & Groundwater Quality",
+      "notes": "Balances biochemical deoxygenation against physical surface reaeration in a 1D plug-flow stream receiving organic wastewater effluent."
+    },
+    {
+      "name": "Critical Travel Time & Minimum River DO Deficit",
+      "eq": "t<sub>c</sub> = <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">k<sub>r</sub> - k<sub>d</sub></span></span> ln[<span class=\"math-frac\"><span class=\"num\">k<sub>r</sub></span><span class=\"den\">k<sub>d</sub></span></span>(1 - <span class=\"math-frac\"><span class=\"num\">D<sub>0</sub>(k<sub>r</sub> - k<sub>d</sub>)</span><span class=\"den\">k<sub>d</sub> L<sub>0</sub></span></span>)]; &nbsp;&nbsp; D<sub>c</sub> = <span class=\"math-frac\"><span class=\"num\">k<sub>d</sub></span><span class=\"den\">k<sub>r</sub></span></span> L<sub>0</sub> e<sup>-k<sub>d</sub> t<sub>c</sub></sup>",
+      "alt": "Minimum river dissolved oxygen: DO<sub>min</sub> = DO<sub>sat</sub> - D<sub>c</sub>; distance to critical sag point x<sub>c</sub> = U · t<sub>c.</sub>",
+      "ref": "NCEES Handbook v2.2, Section 4.5: Environmental - Oxygen Sag",
+      "topic": "Surface Water & Groundwater Quality",
+      "notes": "Occurs at the inflection point where reaeration rate exactly balances deoxygenation rate (dD/dt = 0)."
+    },
+    {
+      "name": "Biochemical Oxygen Demand (BOD) Kinetics",
+      "eq": "BOD<sub>t</sub> = L<sub>0</sub> (1 - e<sup>-k t</sup>) = BOD<sub>u</sub> (1 - e<sup>-k t</sup>); &nbsp;&nbsp; k<sub>T</sub> = k<sub>20</sub> (1.047)<sup>T - 20</sup>",
+      "alt": "5-day BOD to ultimate BOD: BOD<sub>u</sub> = <span class=\"math-frac\"><span class=\"num\">BOD<sub>5</sub></span><span class=\"den\">1 - e<sup>-5k</sup></span></span>; Reaeration temperature correction: k<sub>r,T</sub> = k<sub>r,20</sub> (1.024)<sup>T - 20</sup>.",
+      "ref": "NCEES Handbook v2.2, Section 4.5: Environmental - BOD Kinetics",
+      "topic": "Surface Water & Groundwater Quality",
+      "notes": "BOD exertion follows 1st-order kinetics; deoxygenation uses θ = 1.047; reaeration gas diffusion uses θ = 1.024."
+    },
+    {
+      "name": "Nitrogenous Biochemical Oxygen Demand (NBOD)",
+      "eq": "NBOD = 4.57 × [NH<sub>3</sub>-N (mg/L)]",
+      "alt": "Complete biological nitrification stoichiometry: NH<sub>4</sub><sup>+</sup> + 2O<sub>2</sub> → NO<sub>3</sub><sup>-</sup> + H<sub>2O</sub> + 2H<sup>+</sup>; 64 g O<sub>2</sub> / 14 g N = 4.57.",
+      "ref": "NCEES Handbook v2.2, Section 4.5: Environmental - Oxygen Demand",
+      "topic": "Surface Water & Groundwater Quality",
+      "notes": "Nitrification consumes 4.57 mg O<sub>2</sub> per mg of ammonia nitrogen oxidized to nitrate; partial oxidation to nitrite consumes 3.43 mg O<sub>2</sub>."
+    },
+    {
+      "name": "Solute Sorption Retardation in Groundwater",
+      "eq": "R<sub>d</sub> = 1 + (<span class=\"math-frac\"><span class=\"num\">ρ<sub>b</sub></span><span class=\"den\">n</span></span>) K<sub>d</sub>; &nbsp;&nbsp; v<sub>plume</sub> = <span class=\"math-frac\"><span class=\"num\">v<sub>s</sub></span><span class=\"den\">R<sub>d</sub></span></span>",
+      "alt": "Organic carbon partitioning: K<sub>d</sub> = f<sub>oc</sub> K<sub>oc</sub>; Bulk dry soil density ρ<sub>b</sub>, total porosity n, distribution coefficient K<sub>d.</sub>",
+      "ref": "NCEES Handbook v2.2, Section 4.5: Environmental - Solute Transport",
+      "topic": "Surface Water & Groundwater Quality",
+      "notes": "Adsorption retards contaminant plume velocity relative to groundwater seepage (R<sub>d</sub> ≥ 1.0); R<sub>d</sub> = 1.0 is an unretarded conservative tracer."
+    },
+    {
+      "name": "Clean Water Act Section 303(d) TMDL Allocation",
+      "eq": "TMDL = ∑ WLA + ∑ LA + MOS",
+      "alt": "Waste Load Allocation (WLA) for NPDES point sources; Load Allocation (LA) for nonpoint/background; Margin of Safety (MOS).",
+      "ref": "NCEES Handbook v2.2, Section 4.5: Environmental Regulations",
+      "topic": "Surface Water & Groundwater Quality",
+      "notes": "TMDL sets the maximum allowable daily pollutant assimilative capacity for impaired waterbodies failing water quality criteria."
+    },
+    {
+      "name": "Disinfection CT Compliance & Log Inactivation",
+      "eq": "CT = C × t<sub>10</sub> [mg · min/L]; &nbsp;&nbsp; t<sub>10</sub> = T × BF = (<span class=\"math-frac\"><span class=\"num\">V</span><span class=\"den\">Q</span></span>) × BF",
+      "alt": "Chick-Watson 1st-order disinfection kinetics: ln(N/N<sub>0</sub>) = -k C<sup>n</sup> t; 3-log (99.9%) Giardia; 4-log (99.99%) virus inactivation.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Water Treatment - Disinfection",
+      "topic": "Drinking Water Distribution & Treatment",
+      "notes": "Mandates effective contact time t<sub>10</sub> (time for 10% of water to pass basin), NOT theoretical detention time T = V/Q."
+    },
+    {
+      "name": "Alum Coagulation Chemistry & Alkalinity Deficit",
+      "eq": "1.0 mg/L Alum [Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub> · 14H<sub>2O</sub>] consumes 0.50 mg/L Alkalinity as CaCO<sub>3</sub>",
+      "alt": "Mass rate: lb/day = Q(MGD) × Dosage(mg/L) × 8.34; Alum coagulation releases 6 H<sup>+</sup> ions per mole.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Water Treatment - Coagulation",
+      "topic": "Drinking Water Distribution & Treatment",
+      "notes": "Sufficient natural alkalinity residual (minimum 20 mg/L as CaCO<sub>3</sub>) is required to prevent pH crash and alum floc destabilization."
+    },
+    {
+      "name": "Lime-Soda Ash Precipitation Softening Stoichiometry",
+      "eq": "TH > TA ⇒ CH = TA, &nbsp;&nbsp; NCH = TH - TA; &nbsp;&nbsp; TH ≤ TA ⇒ CH = TH, &nbsp;&nbsp; NCH = 0",
+      "alt": "Lime [Ca(OH)<sub>2</sub>] removes carbonate hardness and CO<sub>2</sub>; Soda ash [Na<sub>2CO,3</sub>] removes non-carbonate hardness (permanent hardness).",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Water Treatment - Softening",
+      "topic": "Drinking Water Distribution & Treatment",
+      "notes": "Total Hardness TH = Ca<sup>2+</sup> + Mg<sup>2+</sup>; Total Alkalinity TA = HCO<sub>3</sub><sup>-</sup>; all concentrations expressed in equivalent mg/L as CaCO<sub>3</sub>."
+    },
+    {
+      "name": "Granular Media Filtration & Backwash Fluidization",
+      "eq": "Filtration Rate = <span class=\"math-frac\"><span class=\"num\">Q</span><span class=\"den\">A<sub>bed</sub></span></span> [gpm/ft<sup>2</sup>]; &nbsp;&nbsp; v<sub>mf</sub> = <span class=\"math-frac\"><span class=\"num\">g(ρ<sub>s</sub> - ρ) d<sup>2</sup></span><span class=\"den\">150 μ</span></span> <span class=\"math-frac\"><span class=\"num\">e<sup>3</sup></span><span class=\"den\">1 - e</span></span>",
+      "alt": "Bed expansion: <span class=\"math-frac\"><span class=\"num\">L<sub>e</sub></span><span class=\"den\">L</span></span> = <span class=\"math-frac\"><span class=\"num\">1 - e</span><span class=\"den\">1 - e<sub>e</sub></span></span>; Clean bed head loss (Kozeny-Carman): h<sub>L</sub> = <span class=\"math-frac\"><span class=\"num\">150 ν (1-e)<sup>2</sup></span><span class=\"den\">g e<sup>3</sup> ψ<sup>2</sup></span></span> (<span class=\"math-frac\"><span class=\"num\">v</span><span class=\"den\">d<sup>2</sup></span></span>) L.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Water Treatment - Filtration",
+      "topic": "Drinking Water Distribution & Treatment",
+      "notes": "Rapid sand filter loading rates: 2 - 6 gpm/ft<sup>2</sup>; Upward backwash fluidization velocity: 12 - 20 gpm/ft<sup>2</sup> to achieve 20 - 30% expansion."
+    },
+    {
+      "name": "Membrane Separation Recovery & Transmembrane Pressure",
+      "eq": "Y = (<span class=\"math-frac\"><span class=\"num\">Q<sub>p</sub></span><span class=\"den\">Q<sub>f</sub></span></span>) × 100%; &nbsp;&nbsp; TMP = (<span class=\"math-frac\"><span class=\"num\">P<sub>feed</sub> + P<sub>conc</sub></span><span class=\"den\">2</span></span>) - P<sub>perm</sub>",
+      "alt": "Mass balance: Q<sub>f</sub> C<sub>f</sub> = Q<sub>p</sub> C<sub>p</sub> + Q<sub>c</sub> C<sub>c</sub>; Salt rejection: R = (1 - <span class=\"math-frac\"><span class=\"num\">C<sub>p</sub></span><span class=\"den\">C<sub>f</sub></span></span>) × 100%.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Water Treatment - Membranes",
+      "topic": "Drinking Water Distribution & Treatment",
+      "notes": "RO and NF membrane fluxes are driven by net driving pressure (TMP - Δπ, where Δπ is differential osmotic pressure)."
+    },
+    {
+      "name": "Water Distribution Pressure & Storage Tank Sizing",
+      "eq": "P<sub>fire</sub> ≥ 20 psi (138 kPa); &nbsp;&nbsp; P<sub>peak hour</sub> ≥ 35 psi (240 kPa)",
+      "alt": "Total distribution storage = Equalization Volume + Fire Suppression Reserve + Emergency Outage Reserve.",
+      "ref": "NCEES Handbook v2.2, Section 4.6 & Ten States Standards: Water Distribution",
+      "topic": "Drinking Water Distribution & Treatment",
+      "notes": "20 psi absolute minimum under fire flow prevents back-siphonage of contaminated groundwater through joints."
+    },
+    {
+      "name": "Activated Sludge Food-to-Microorganism (F:M) Ratio",
+      "eq": "F:M = <span class=\"math-frac\"><span class=\"num\">Q · S<sub>0</sub></span><span class=\"den\">V · X</span></span> = <span class=\"math-frac\"><span class=\"num\">Q(MGD) × S<sub>0</sub>(mg/L) × 8.34</span><span class=\"den\">V(MG) × MLVSS(mg/L) × 8.34</span></span> [day<sup>-1</sup>]",
+      "alt": "Conventional aeration range: 0.2 - 0.5 lb BOD<sub>5</sub>/lb MLVSS · day; Extended aeration: 0.05 - 0.15 day<sup>-1</sup>.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Wastewater - Activated Sludge",
+      "topic": "Wastewater Collection & Treatment",
+      "notes": "Biomass X in the denominator must strictly be volatile suspended solids (MLVSS), not total suspended solids (MLSS)."
+    },
+    {
+      "name": "Mean Cell Residence Time (MCRT / Sludge Age)",
+      "eq": "θ<sub>c</sub> = MCRT = <span class=\"math-frac\"><span class=\"num\">V<sub>a</sub> X<sub>a</sub> + V<sub>c</sub> X<sub>c</sub></span><span class=\"den\">Q<sub>w</sub> X<sub>w</sub> + Q<sub>e</sub> X<sub>e</sub></span></span> (days)",
+      "alt": "Simplified (aeration solids only): θ<sub>c</sub> = <span class=\"math-frac\"><span class=\"num\">V X</span><span class=\"den\">Q<sub>w</sub> X<sub>w</sub> + Q<sub>e</sub> X<sub>e</sub></span></span>; Waste activated sludge pumping rate Q<sub>w</sub> = <span class=\"math-frac\"><span class=\"num\">(V X / θ<sub>c</sub>) - Q<sub>e</sub> X<sub>e</sub></span><span class=\"den\">X<sub>w</sub></span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Wastewater - Solids Retention Time",
+      "topic": "Wastewater Collection & Treatment",
+      "notes": "MCRT governs biological process selection: nitrification requires θ<sub>c</sub> ≥ 8 - 15 days in cold weather to retain slow-growing autotrophs."
+    },
+    {
+      "name": "Sanitary Gravity Sewer Minimum Self-Cleansing Slope",
+      "eq": "S<sub>min</sub> = [<span class=\"math-frac\"><span class=\"num\">V · n</span><span class=\"den\">1.486 R<sub>h</sub><sup>2/3</sup></span></span>]<sup>2</sup> [for full pipe R<sub>h</sub> = D/4]",
+      "alt": "Ten States Standards: minimum slope achieves V ≥ 2.0 ft/s flowing full: 8-in = 0.40%, 10-in = 0.28%, 12-in = 0.22%, 15-in = 0.15%.",
+      "ref": "NCEES Handbook v2.2, Section 4.6 & Ten States Standards: Wastewater Collection",
+      "topic": "Wastewater Collection & Treatment",
+      "notes": "Minimum scouring velocity of 2.0 ft/s prevents deposition of putrescible organic fecal solids and hydrogen sulfide gas formation."
+    },
+    {
+      "name": "Lift Station Wet Well Minimum Cycle Time & Sizing",
+      "eq": "V<sub>active</sub> = <span class=\"math-frac\"><span class=\"num\">T<sub>min</sub> Q<sub>p</sub></span><span class=\"den\">4</span></span>",
+      "alt": "Cycle time: T = <span class=\"math-frac\"><span class=\"num\">V</span><span class=\"den\">Q<sub>in</sub></span></span> + <span class=\"math-frac\"><span class=\"num\">V</span><span class=\"den\">Q<sub>p</sub> - Q<sub>in</sub></span></span>; worst-case minimum cycle time occurs when influent inflow Q<sub>in</sub> = 0.5 Q<sub>p.</sub>",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Wastewater - Wet Well Design",
+      "topic": "Wastewater Collection & Treatment",
+      "notes": "Protects submersible pump motors from overheating; typical pump manufacturers mandate T<sub>min</sub> ≥ 10 - 15 minutes (maximum 4-6 starts/hr)."
+    },
+    {
+      "name": "Bacterial Monod Kinetics & Effluent Soluble Substrate",
+      "eq": "μ = mu<sub>max</sub> <span class=\"math-frac\"><span class=\"num\">S</span><span class=\"den\">K<sub>s</sub> + S</span></span>; &nbsp;&nbsp; S = <span class=\"math-frac\"><span class=\"num\">K<sub>s</sub>(1 + b θ<sub>c</sub>)</span><span class=\"den\">θ<sub>c</sub>(mu<sub>max</sub> - b) - 1</span></span>",
+      "alt": "Specific growth rate μ, half-velocity constant K<sub>s</sub>, endogenous decay coefficient b, sludge age θ<sub>c</sub>; Net yield: Y<sub>obs</sub> = <span class=\"math-frac\"><span class=\"num\">Y</span><span class=\"den\">1 + b θ<sub>c</sub></span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Wastewater - Biological Kinetics",
+      "topic": "Wastewater Collection & Treatment",
+      "notes": "Shows that effluent soluble substrate concentration S is solely controlled by sludge age θ<sub>c</sub>, independent of influent concentration S<sub>0.</sub>"
+    },
+    {
+      "name": "Anaerobic Digester Volatile Solids Reduction (Van Kleeck)",
+      "eq": "VSR (%) = [<span class=\"math-frac\"><span class=\"num\">VS<sub>in</sub> - VS<sub>out</sub></span><span class=\"den\">VS<sub>in</sub> - (VS<sub>in</sub> · VS<sub>out</sub>)</span></span>\right] × 100%",
+      "alt": "Methane gas yield: CH<sub>4</sub> Volume (ft<sup>3</sup>/day) = 5.62 × (lb BOD<sub>L</sub> removed - 1.42 · P<sub>x</sub>); VS<sub>in</sub> and VS<sub>out</sub> expressed as decimals.",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Wastewater - Biosolids Digestion",
+      "topic": "Wastewater Collection & Treatment",
+      "notes": "Van Kleeck equation accounts for the continuous reduction in total solid mass during biological volatile solids destruction."
+    },
+    {
+      "name": "Average End Area & Prismoidal Earthwork Volume",
+      "eq": "V<sub>AEA</sub> = L (<span class=\"math-frac\"><span class=\"num\">A<sub>1</sub> + A<sub>2</sub></span><span class=\"den\">2 × 27</span></span>) (yd<sup>3</sup>); &nbsp;&nbsp; C<sub>p</sub> = <span class=\"math-frac\"><span class=\"num\">L(c<sub>1</sub> - c<sub>2</sub>)(w<sub>1</sub> - w<sub>2</sub>)</span><span class=\"den\">12 × 27</span></span>; &nbsp;&nbsp; V<sub>p</sub> = V<sub>AEA</sub> - C<sub>p</sub>",
+      "alt": "Prismoidal formula: V<sub>p</sub> = <span class=\"math-frac\"><span class=\"num\">L(A<sub>1</sub> + 4A<sub>m</sub> + A<sub>2</sub>)</span><span class=\"den\">6 × 27</span></span>; Borrow pit unit area method: V = <span class=\"math-frac\"><span class=\"num\">A<sub>grid</sub></span><span class=\"den\">4 × 27</span></span> [∑ h<sub>1</sub> + 2∑ h<sub>2</sub> + 3∑ h<sub>3</sub> + 4∑ h<sub>4</sub>].",
+      "ref": "NCEES Handbook v2.2, Section 1.2: Construction - Earthwork",
+      "topic": "Project Sitework",
+      "notes": "Average End Area method consistently overestimates volume on tapering cuts/fills; prismoidal correction C<sub>p</sub> is subtracted to yield exact volume."
+    },
+    {
+      "name": "OSHA Excavation Safety Maximum Allowable Slopes",
+      "eq": "Type A = <span class=\"math-frac\"><span class=\"num\">3</span><span class=\"den\">4</span></span>H:1V (53°); &nbsp;&nbsp; Type B = 1H:1V (45°); &nbsp;&nbsp; Type C = 1<span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span>H:1V (34°)",
+      "alt": "Type A unconfined compressive strength q<sub>u</sub> ≥ 1.5 tsf; Type B: 0.5 < q<sub>u</sub> < 1.5 tsf; Type C: q<sub>u</sub> ≤ 0.5 tsf or submerged/granular.",
+      "ref": "NCEES Handbook v2.2, Section 1.2 & OSHA 29 CFR 1926 Subpart P: Safety",
+      "topic": "Project Sitework",
+      "notes": "Benching is strictly PROHIBITED in Type C soil. Trench excavations ≥ 5 ft deep require protective shoring/shields; spoils setback ≥ 2 ft."
+    },
+    {
+      "name": "Horizontal Circular Curve Geometry",
+      "eq": "T = R tan(<span class=\"math-frac\"><span class=\"num\">Δ</span><span class=\"den\">2</span></span>); &nbsp;&nbsp; L = <span class=\"math-frac\"><span class=\"num\">π R Δ</span><span class=\"den\">180°</span></span>; &nbsp;&nbsp; E = R[<span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">cos(Δ / 2)</span></span> - 1]; &nbsp;&nbsp; M = R(1 - cos<span class=\"math-frac\"><span class=\"num\">Δ</span><span class=\"den\">2</span></span>)",
+      "alt": "Stationing: Station PT = Station PC + L; Middle ordinate sight clearance: M<sub>s</sub> = R[1 - cos(<span class=\"math-frac\"><span class=\"num\">28.65 S</span><span class=\"den\">R</span></span>)].",
+      "ref": "NCEES Handbook v2.2, Section 2.1: Geometric Design - Horizontal Curves",
+      "topic": "Project Sitework",
+      "notes": "Centerline route stationing runs along the curved arc length L from PC to PT, NEVER along tangent legs through PI."
+    },
+    {
+      "name": "Equal-Tangent Parabolic Vertical Curve Geometry",
+      "eq": "y = Elev<sub>VPC</sub> + g<sub>1</sub> x + (<span class=\"math-frac\"><span class=\"num\">g<sub>2</sub> - g<sub>1</sub></span><span class=\"den\">2L</span></span>) x<sup>2</sup>; &nbsp;&nbsp; x<sub>turn</sub> = -<span class=\"math-frac\"><span class=\"num\">g<sub>1</sub> L</span><span class=\"den\">g<sub>2</sub> - g<sub>1</sub></span></span>",
+      "alt": "Elevation rate of change r = <span class=\"math-frac\"><span class=\"num\">g<sub>2</sub> - g<sub>1</sub></span><span class=\"den\">L</span></span> = <span class=\"math-frac\"><span class=\"num\">A</span><span class=\"den\">L</span></span>; Turning point (crest peak or sag low point) occurs where slope <span class=\"math-frac\"><span class=\"num\">dy</span><span class=\"den\">dx</span></span> = 0.",
+      "ref": "NCEES Handbook v2.2, Section 2.2: Geometric Design - Vertical Curves",
+      "topic": "Project Sitework",
+      "notes": "Grade g<sub>1</sub>, g<sub>2</sub> entered in decimal or percent (with appropriate divisor); low point on sag curves dictates exact catch basin inlet placement."
+    },
+    {
+      "name": "Vertical Curve Sight Distance & K-Factor Design",
+      "eq": "K = <span class=\"math-frac\"><span class=\"num\">L</span><span class=\"den\">A</span></span>; &nbsp;&nbsp; L<sub>crest</sub> = <span class=\"math-frac\"><span class=\"num\">A S<sup>2</sup></span><span class=\"den\">2,158</span></span> [for S ≤ L]; &nbsp;&nbsp; L<sub>sag</sub> = <span class=\"math-frac\"><span class=\"num\">A S<sup>2</sup></span><span class=\"den\">400 + 3.5 S</span></span> [headlight S ≤ L]",
+      "alt": "K-value represents horizontal distance (feet) required to achieve a 1% change in roadway gradient; A = |g<sub>2</sub> - g<sub>1</sub>|.",
+      "ref": "NCEES Handbook v2.2, Section 2.2: Geometric Design - Vertical Sight Distance",
+      "topic": "Project Sitework",
+      "notes": "Crest curves governed by eye height (3.5 ft) and object height (2.0 ft); Sag curves governed by headlight beam angle (1° upward divergence)."
+    },
+    {
+      "name": "Closed Traverse Compass (Bowditch) Balancing Rule",
+      "eq": "Corr<sub>lat</sub> = -Δ L<sub>total</sub> (<span class=\"math-frac\"><span class=\"num\">l<sub>i</sub></span><span class=\"den\">∑ l</span></span>); &nbsp;&nbsp; Corr<sub>dep</sub> = -Δ D<sub>total</sub> (<span class=\"math-frac\"><span class=\"num\">l<sub>i</sub></span><span class=\"den\">∑ l</span></span>)",
+      "alt": "Linear misclosure = <span class=\"math-sqrt\">√<span class=\"radicand\">(Δ L<sub>total</sub>)<sup>2</sup> + (Δ D<sub>total</sub>)<sup>2</sup></span></span>; Precision = <span class=\"math-frac\"><span class=\"num\">Linear Misclosure</span><span class=\"den\">Traverse Perimeter</span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 2.1: Surveying - Traverse Adjustment",
+      "topic": "Project Sitework",
+      "notes": "Distributes closure errors in latitude and departure proportionally to the length of each survey course; assumes equal measurement precision."
+    },
+    {
+      "name": "Retaining Wall Overturning & Sliding Stability",
+      "eq": "FS<sub>overturning</sub> = <span class=\"math-frac\"><span class=\"num\">∑ M<sub>resist</sub></span><span class=\"den\">∑ M<sub>overturn</sub></span></span>; &nbsp;&nbsp; FS<sub>sliding</sub> = <span class=\"math-frac\"><span class=\"num\">V tandelta + c<sub>a</sub> B</span><span class=\"den\">H</span></span>",
+      "alt": "Moments taken about front toe; interface friction delta = <span class=\"math-frac\"><span class=\"num\">2</span><span class=\"den\">3</span></span>φ'; Location of resultant: <span style=\"text-decoration:overline\">x</span> = <span class=\"math-frac\"><span class=\"num\">∑ M<sub>net</sub></span><span class=\"den\">V</span></span>; Eccentricity e = <span class=\"math-frac\"><span class=\"num\">B</span><span class=\"den\">2</span></span> - <span style=\"text-decoration:overline\">x</span> ≤ <span class=\"math-frac\"><span class=\"num\">B</span><span class=\"den\">6</span></span>.",
+      "ref": "NCEES Handbook v2.2, Section 3.4: Geotechnical - Retaining Wall Stability",
+      "topic": "Project Sitework",
+      "notes": "Design standards require FS<sub>overturning</sub> ≥ 2.0 and FS<sub>sliding</sub> ≥ 1.5; Resultant within middle-third (e ≤ B/6) avoids base tension."
+    },
+    {
+      "name": "Earthwork Volume Conversions (Bank, Loose, Compacted)",
+      "eq": "V<sub>BCY</sub> = <span class=\"math-frac\"><span class=\"num\">V<sub>CCY</sub></span><span class=\"den\">1 - Shrinkage</span></span>; &nbsp;&nbsp; V<sub>LCY</sub> = V<sub>BCY</sub> × (1 + Swell)",
+      "alt": "Haul Truck Loads = <span class=\"math-frac\"><span class=\"num\">V<sub>LCY</sub></span><span class=\"den\">Truck Capacity (LCY)</span></span>; &nbsp;&nbsp; Excavator BCY/hr = <span class=\"math-frac\"><span class=\"num\">LCY/hr</span><span class=\"den\">1 + Swell</span></span>",
+      "ref": "NCEES Handbook v2.2, Section 1.2: Construction Earthwork",
+      "topic": "Project Planning",
+      "notes": "Bank Cubic Yards (BCY) is the in-situ reference state; always convert Compacted Fill (CCY) to BCY first before applying swell to get Loose Volume (LCY)."
+    },
+    {
+      "name": "Cost Indexing, Power Sizing & Schedule Crashing Slope",
+      "eq": "C<sub>2</sub> = C<sub>1</sub> (<span class=\"math-frac\"><span class=\"num\">I<sub>2</sub></span><span class=\"den\">I<sub>1</sub></span></span>); &nbsp;&nbsp; C<sub>2</sub> = C<sub>1</sub> (<span class=\"math-frac\"><span class=\"num\">Q<sub>2</sub></span><span class=\"den\">Q<sub>1</sub></span></span>)<sup>m</sup>; &nbsp;&nbsp; Cost Slope = <span class=\"math-frac\"><span class=\"num\">C<sub>crash</sub> - C<sub>normal</sub></span><span class=\"den\">t<sub>normal</sub> - t<sub>crash</sub></span></span>",
+      "alt": "Straight-Line Depreciation: D = <span class=\"math-frac\"><span class=\"num\">C<sub>0</sub> - S<sub>n</sub></span><span class=\"den\">n</span></span>; &nbsp;&nbsp; Book Value BV<sub>t</sub> = C<sub>0</sub> - t · D",
+      "ref": "NCEES Handbook v2.2, Section 1.2 & 1.3: Cost Estimating & Depreciation",
+      "topic": "Project Planning",
+      "notes": "Economies-of-scale exponent m is typically 0.6 to 0.7 for water/wastewater treatment tanks. Crash critical path activities starting with the lowest cost slope."
+    },
+    {
+      "name": "Darcy Constant-Head & Falling-Head Soil Permeameters",
+      "eq": "k<sub>const</sub> = <span class=\"math-frac\"><span class=\"num\">Q · L</span><span class=\"den\">A · h · t</span></span>; &nbsp;&nbsp; k<sub>falling</sub> = <span class=\"math-frac\"><span class=\"num\">a · L</span><span class=\"den\">A · t</span></span> ln(<span class=\"math-frac\"><span class=\"num\">h<sub>1</sub></span><span class=\"den\">h<sub>2</sub></span></span>)",
+      "alt": "Hazen empirical sand permeability: k (cm/s) ≈ C · (D<sub>10</sub>)<sup>2</sup> with D<sub>10</sub> in mm",
+      "ref": "NCEES Handbook v2.2, Section 3.1: Geotechnical - Permeability",
+      "topic": "Soil Mechanics",
+      "notes": "Constant-head test is used for clean sands and gravels; falling-head test with standpipe area a is used for fine silts and clays."
+    },
+    {
+      "name": "Infinite Slope Stability & Undrained Clay Strength",
+      "eq": "FS<sub>seepage</sub> = (<span class=\"math-frac\"><span class=\"num\">γ'</span><span class=\"den\">gamma<sub>sat</sub></span></span>) <span class=\"math-frac\"><span class=\"num\">tanφ'</span><span class=\"den\">tanβ</span></span>; &nbsp;&nbsp; FS<sub>dry</sub> = <span class=\"math-frac\"><span class=\"num\">tanφ'</span><span class=\"den\">tanβ</span></span>; &nbsp;&nbsp; c<sub>u</sub> = <span class=\"math-frac\"><span class=\"num\">q<sub>u</sub></span><span class=\"den\">2</span></span>",
+      "alt": "Taylor cohesive slope stability: FS = <span class=\"math-frac\"><span class=\"num\">c<sub>u</sub></span><span class=\"den\">N<sub>s</sub> · γ · H</span></span>; &nbsp;&nbsp; Triaxial failure: sinφ' = <span class=\"math-frac\"><span class=\"num\">σ<sub>1</sub> - σ<sub>3</sub></span><span class=\"den\">σ<sub>1</sub> + σ<sub>3</sub></span></span>",
+      "ref": "NCEES Handbook v2.2, Section 3.1 & 3.5: Shear Strength & Slope Stability",
+      "topic": "Soil Mechanics",
+      "notes": "Parallel seepage to the ground surface cuts cohesionless slope factor of safety roughly in half (since γ' / gamma<sub>sat</sub> ≈ 0.5)."
+    },
+    {
+      "name": "Zero Air Voids (ZAV) Curve & Relative Density of Sand",
+      "eq": "gamma<sub>ZAV</sub> = <span class=\"math-frac\"><span class=\"num\">G<sub>s</sub> γ<sub>w</sub></span><span class=\"den\">1 + w G<sub>s</sub></span></span>; &nbsp;&nbsp; D<sub>r</sub> (%) = [<span class=\"math-frac\"><span class=\"num\">e<sub>max</sub> - e</span><span class=\"den\">e<sub>max</sub> - e<sub>min</sub></span></span>] × 100%",
+      "alt": "Relative Compaction: RC (%) = <span class=\"math-frac\"><span class=\"num\">gamma<sub>d,field</sub></span><span class=\"den\">gamma<sub>d,max (Proctor)</sub></span></span> × 100%",
+      "ref": "NCEES Handbook v2.2, Section 3.1: Geotechnical - Compaction",
+      "topic": "Materials",
+      "notes": "The Zero Air Voids curve corresponds to 100% saturation (S = 1.0) and represents the theoretical upper limit of any compaction curve."
+    },
+    {
+      "name": "AASHTO Group Index & Aggregate Moisture Absorption",
+      "eq": "GI = (F<sub>200</sub> - 35)[0.2 + 0.005(LL - 40)] + 0.01(F<sub>200</sub> - 15)(PI - 10)",
+      "alt": "Aggregate Absorption (%) = (<span class=\"math-frac\"><span class=\"num\">W<sub>SSD</sub> - W<sub>dry</sub></span><span class=\"den\">W<sub>dry</sub></span></span>) × 100%",
+      "ref": "NCEES Handbook v2.2, Section 1.5 & 3.1: Aggregates & AASHTO Classification",
+      "topic": "Materials",
+      "notes": "AASHTO Group Index GI is rounded to the nearest whole non-negative integer; lower GI indicates superior pavement subgrade quality."
+    },
+    {
+      "name": "Parshall Flume, Broad-Crested Weir & Orifice Flow",
+      "eq": "Q<sub>Parshall</sub> = 4.0 W H<sub>a</sub><sup>1.522W<sup>0.026</sup></sup>; &nbsp;&nbsp; Q<sub>broad</sub> = 3.09 C<sub>d</sub> b H<sup>1.5</sup>; &nbsp;&nbsp; Q<sub>orifice</sub> = C<sub>d</sub> A<sub>o</sub> <span class=\"math-sqrt\">√<span class=\"radicand\">2gh</span></span>",
+      "alt": "Venturi meter: Q = C<sub>d</sub> A<sub>2</sub> <span class=\"math-sqrt\">√<span class=\"radicand\"><span class=\"math-frac\"><span class=\"num\">2g Δ H</span><span class=\"den\">1 - (D<sub>2</sub>/D<sub>1</sub>)<sup>4</sup></span></span></span></span>; &nbsp;&nbsp; Δ H<sub>water</sub> = Δ h<sub>man</sub> (SG<sub>Hg</sub> - 1)",
+      "ref": "NCEES Handbook v2.2, Section 4.1 & 4.2: Flow Measurement",
+      "topic": "Analysis and Design",
+      "notes": "Sharp-edged circular orifice coefficient is typically C<sub>d</sub> ≈ 0.60 - 0.62; Venturi meter coefficient is C<sub>d</sub> ≈ 0.98."
+    },
+    {
+      "name": "Stokes Discrete Particle Settling & Clarifier Weir Loading",
+      "eq": "v<sub>s</sub> = <span class=\"math-frac\"><span class=\"num\">g(ρ<sub>s</sub> - ρ) d<sup>2</sup></span><span class=\"den\">18 μ</span></span> = <span class=\"math-frac\"><span class=\"num\">g(G<sub>s</sub> - 1) d<sup>2</sup></span><span class=\"den\">18 ν</span></span>; &nbsp;&nbsp; WLR = <span class=\"math-frac\"><span class=\"num\">Q</span><span class=\"den\">π D</span></span> [gpd/ft]",
+      "alt": "Sludge Volume Index: SVI (mL/g) = <span class=\"math-frac\"><span class=\"num\">SV<sub>30</sub> (mL/L) × 1,000</span><span class=\"den\">MLSS (mg/L)</span></span>",
+      "ref": "NCEES Handbook v2.2, Section 4.6: Sedimentation & Activated Sludge",
+      "topic": "Analysis and Design",
+      "notes": "Stokes law applies in the laminar settling regime (Reynolds number Re = v<sub>s</sub> d / ν < 0.5). Fractional removal for v<sub>s</sub> < SOR is R = v<sub>s</sub> / SOR."
+    },
+    {
+      "name": "Pipeline Thrust Block Force & Hardy Cross Loop Correction",
+      "eq": "F<sub>T</sub> = 2 P A sin(<span class=\"math-frac\"><span class=\"num\">θ</span><span class=\"den\">2</span></span>); &nbsp;&nbsp; Δ Q = -<span class=\"math-frac\"><span class=\"num\">∑ h<sub>f</sub></span><span class=\"den\">∑ |n · r · Q<sup>n-1</sup>|</span></span>",
+      "alt": "Equivalent Minor Loss Length: L<sub>eq</sub> = <span class=\"math-frac\"><span class=\"num\">K · D</span><span class=\"den\">f</span></span>; &nbsp;&nbsp; Sudden Enlargement: h<sub>L</sub> = <span class=\"math-frac\"><span class=\"num\">(V<sub>1</sub> - V<sub>2</sub>)<sup>2</sup></span><span class=\"den\">2g</span></span>",
+      "ref": "NCEES Handbook v2.2, Section 4.1: Pipe Networks & Thrust Restraint",
+      "topic": "Hydraulics-Closed Conduit",
+      "notes": "For a 90° pipe bend, sin(45°) = 0.7071 so resultant thrust is F<sub>T</sub> = 1.414 P A. Ensure pressure P (ψ) and area A (in<sup>2</sup>) have matching units."
+    },
+    {
+      "name": "Best Hydraulic Cross-Section & Horton Composite Roughness",
+      "eq": "b<sub>rect</sub> = 2y (R<sub>h</sub> = <span class=\"math-frac\"><span class=\"num\">y</span><span class=\"den\">2</span></span>); &nbsp;&nbsp; z<sub>trap</sub> = <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\"><span class=\"math-sqrt\">√<span class=\"radicand\">3</span></span></span></span> = 0.577 (60° hexagon); &nbsp;&nbsp; n<sub>c</sub> = [<span class=\"math-frac\"><span class=\"num\">∑ (P<sub>i</sub> n<sub>i</sub><sup>1.5</sup>)</span><span class=\"den\">P<sub>total</sub></span></span>]<sup>2/3</sup>",
+      "alt": "Specific Energy: E = y + <span class=\"math-frac\"><span class=\"num\">V<sup>2</sup></span><span class=\"den\">2g</span></span>; &nbsp;&nbsp; Specific Force: M = <span class=\"math-frac\"><span class=\"num\">Q<sup>2</sup></span><span class=\"den\">g A</span></span> + <span style=\"text-decoration:overline\">y</span> A",
+      "ref": "NCEES Handbook v2.2, Section 4.2: Open Channel Hydraulics",
+      "topic": "Hydraulics-Open Channel",
+      "notes": "Best hydraulic section minimizes wetted perimeter P for a fixed flow area A, maximizing conveyance Q."
+    },
+    {
+      "name": "Channel Step Choke Transition & Riprap Stone Stability",
+      "eq": "Δ z<sub>max</sub> = E<sub>1</sub> - E<sub>min</sub> = E<sub>1</sub> - 1.5 y<sub>c</sub>; &nbsp;&nbsp; d<sub>50</sub> = [<span class=\"math-frac\"><span class=\"num\">V</span><span class=\"den\">C <span class=\"math-sqrt\">√<span class=\"radicand\">2g(S<sub>s</sub> - 1)</span></span></span></span>]<sup>2</sup>",
+      "alt": "Strickler gravel roughness: n = 0.0395 (d<sub>50</sub>)<sup>1/6</sup> with d<sub>50</sub> in ft",
+      "ref": "NCEES Handbook v2.2, Section 4.2: Channel Transitions & Riprap",
+      "topic": "Hydraulics-Open Channel",
+      "notes": "If an upward floor step exceeds Δ z<sub>max</sub>, the flow chokes to critical depth over the step and backs up upstream water depth."
+    },
+    {
+      "name": "Horton & Green-Ampt Soil Infiltration Equations",
+      "eq": "f(t) = f<sub>c</sub> + (f<sub>0</sub> - f<sub>c</sub>)e<sup>-kt</sup>; &nbsp;&nbsp; f<sub>GA</sub>(t) = K(1 + <span class=\"math-frac\"><span class=\"num\">ψ Δθ</span><span class=\"den\">F(t)</span></span>)",
+      "alt": "Cumulative Horton Infiltration: F(t) = f<sub>c</sub> t + <span class=\"math-frac\"><span class=\"num\">f<sub>0</sub> - f<sub>c</sub></span><span class=\"den\">k</span></span>(1 - e<sup>-kt</sup>)",
+      "ref": "NCEES Handbook v2.2, Section 4.3: Hydrology - Infiltration",
+      "topic": "Hydrology",
+      "notes": "As soil saturates over time (t → ∞ or F → ∞), infiltration capacity f(t) asymptotically approaches saturated conductivity f<sub>c</sub> or K."
+    },
+    {
+      "name": "Weibull Plotting Position, Normal Ratio & Lake Evaporation",
+      "eq": "T = <span class=\"math-frac\"><span class=\"num\">n + 1</span><span class=\"den\">m</span></span>; &nbsp;&nbsp; p = <span class=\"math-frac\"><span class=\"num\">m</span><span class=\"den\">n + 1</span></span>; &nbsp;&nbsp; P<sub>X</sub> = <span class=\"math-frac\"><span class=\"num\">N<sub>X</sub></span><span class=\"den\">3</span></span>(<span class=\"math-frac\"><span class=\"num\">P<sub>A</sub></span><span class=\"den\">N<sub>A</sub></span></span> + <span class=\"math-frac\"><span class=\"num\">P<sub>B</sub></span><span class=\"den\">N<sub>B</sub></span></span> + <span class=\"math-frac\"><span class=\"num\">P<sub>C</sub></span><span class=\"den\">N<sub>C</sub></span></span>)",
+      "alt": "Lake Evaporation: E<sub>lake</sub> = K<sub>pan</sub> × E<sub>pan</sub>; &nbsp;&nbsp; Bioretention Area: A<sub>f</sub> = <span class=\"math-frac\"><span class=\"num\">WQ<sub>v</sub> · d<sub>f</sub></span><span class=\"den\">k(h<sub>p</sub> + d<sub>f</sub>)t<sub>f</sub></span></span>",
+      "ref": "NCEES Handbook v2.2, Section 4.3: Statistical Hydrology & Evaporation",
+      "topic": "Hydrology",
+      "notes": "In Weibull frequency ranking, m = 1 is the largest flood in n years of record. Normal ratio method weights rain gauges by annual normals N<sub>i.</sub>"
+    },
+    {
+      "name": "Well Specific Capacity, Well Efficiency & Capture Zone Width",
+      "eq": "Specific Capacity = <span class=\"math-frac\"><span class=\"num\">Q</span><span class=\"den\">s<sub>w</sub></span></span>; &nbsp;&nbsp; eta<sub>well</sub> = (<span class=\"math-frac\"><span class=\"num\">s<sub>formation</sub></span><span class=\"den\">s<sub>total</sub></span></span>) × 100%; &nbsp;&nbsp; W<sub>max</sub> = <span class=\"math-frac\"><span class=\"num\">Q</span><span class=\"den\">K b i</span></span>",
+      "alt": "Capture Zone Stagnation Point: x<sub>s</sub> = <span class=\"math-frac\"><span class=\"num\">Q</span><span class=\"den\">2π K b i</span></span>; &nbsp;&nbsp; Width at Well: W<sub>well</sub> = <span class=\"math-frac\"><span class=\"num\">W<sub>max</sub></span><span class=\"den\">2</span></span>",
+      "ref": "NCEES Handbook v2.2, Section 4.4: Well Performance & Capture Zones",
+      "topic": "Groundwater and Wells",
+      "notes": "Total drawdown inside a pumped well casing equals laminar aquifer formation loss (B Q) plus turbulent screen/skin well loss (C Q<sup>2</sup>)."
+    },
+    {
+      "name": "Unconfined Specific Yield, Theis Recovery & Sichardt Radius",
+      "eq": "n = S<sub>y</sub> + S<sub>r</sub>; &nbsp;&nbsp; s' = <span class=\"math-frac\"><span class=\"num\">2.303 Q</span><span class=\"den\">4π T</span></span>log<sub>10</sub>(<span class=\"math-frac\"><span class=\"num\">t<sub>p</sub> + t'</span><span class=\"den\">t'</span></span>); &nbsp;&nbsp; R<sub>0</sub> = 3,000 s<sub>w</sub> <span class=\"math-sqrt\">√<span class=\"radicand\">K</span></span>",
+      "alt": "AWWA A100 maximum well screen entrance velocity: v<sub>screen</sub> ≤ 0.1 ft/s",
+      "ref": "NCEES Handbook v2.2, Section 4.4: Aquifer Storage & Recovery Tests",
+      "topic": "Groundwater and Wells",
+      "notes": "Specific yield S<sub>y</sub> is the gravity-drainable porosity of an unconfined aquifer. In Sichardt's formula, R<sub>0</sub> and s<sub>w</sub> are in meters and K is in m/s."
+    },
+    {
+      "name": "Henry's Law Gas Partitioning, First-Order Half-Life & Solubility",
+      "eq": "C<sub>air</sub> = H' · C<sub>water</sub>; &nbsp;&nbsp; t<sub>1/2</sub> = <span class=\"math-frac\"><span class=\"num\">ln(2)</span><span class=\"den\">k</span></span> = <span class=\"math-frac\"><span class=\"num\">0.693</span><span class=\"den\">k</span></span>; &nbsp;&nbsp; K<sub>sp</sub> = [M<sup>2+</sup>][OH<sup>-</sup>]<sup>2</sup>",
+      "alt": "First-order plug flow decay: C(t) = C<sub>0</sub> e<sup>-kt</sup> where travel time t = <span class=\"math-frac\"><span class=\"num\">Distance</span><span class=\"den\">Velocity</span></span>",
+      "ref": "NCEES Handbook v2.2, Section 4.5: Environmental Chemistry & Kinetics",
+      "topic": "Surface Water & Groundwater Quality",
+      "notes": "Each 1.0 unit increase in pH increases [OH<sup>−</sup>] by 10×, reducing divalent metal solubility [M<sup>2+</sup>] by 100×."
+    },
+    {
+      "name": "O'Connor-Dobbins Reaeration, Vollenweider Lake P & Alkalinity",
+      "eq": "k<sub>r</sub> = <span class=\"math-frac\"><span class=\"num\">(D<sub>m</sub> U)<sup>0.5</sup></span><span class=\"den\">H<sup>1.5</sup></span></span>; &nbsp;&nbsp; L<sub>c</sub> = [P]<sub>crit</sub> (<span class=\"math-frac\"><span class=\"num\">z</span><span class=\"den\">τ<sub>w</sub></span></span>)(1 + <span class=\"math-sqrt\">√<span class=\"radicand\">τ<sub>w</sub></span></span>); &nbsp;&nbsp; 1.0 meq/L = 50 mg/L as CaCO<sub>3</sub>",
+      "alt": "Total Suspended Solids: TSS (mg/L) = <span class=\"math-frac\"><span class=\"num\">(W<sub>dry</sub> - W<sub>tare</sub>) (mg)</span><span class=\"den\">V<sub>sample</sub> (L)</span></span>",
+      "ref": "NCEES Handbook v2.2, Section 4.5: Limnology & Water Quality",
+      "topic": "Surface Water & Groundwater Quality",
+      "notes": "Dissolved oxygen saturation DO<sub>sat</sub> decreases as water temperature increases or as elevation increases (lower atmospheric pressure)."
+    },
+    {
+      "name": "Packed Tower Air Stripping, GAC EBCT & UV Fluence",
+      "eq": "R = H'(<span class=\"math-frac\"><span class=\"num\">G</span><span class=\"den\">L</span></span>); &nbsp;&nbsp; NTU = (<span class=\"math-frac\"><span class=\"num\">R</span><span class=\"den\">R-1</span></span>)ln[<span class=\"math-frac\"><span class=\"num\">(C<sub>in</sub>/C<sub>out</sub>)(R-1)+1</span><span class=\"den\">R</span></span>]; &nbsp;&nbsp; EBCT = <span class=\"math-frac\"><span class=\"num\">V<sub>media</sub></span><span class=\"den\">Q</span></span>",
+      "alt": "UV Disinfection Dose (Fluence): D (mJ/cm<sup>2</sup>) = I<sub>avg</sub> (mW/cm<sup>2</sup>) × t (s)",
+      "ref": "NCEES Handbook v2.2, Section 4.6.2 & 4.6.3: Adsorption, Stripping & UV",
+      "topic": "Drinking Water Distribution & Treatment",
+      "notes": "Stripping factor R must exceed 1.0 for effective VOC removal; packing height is Z = HTU × NTU."
+    },
+    {
+      "name": "Langelier Saturation Index (LSI), Stage 2 DBP LRAA & Chemical Feed",
+      "eq": "LSI = pH - pH<sub>s</sub>; &nbsp;&nbsp; LRAA = <span class=\"math-frac\"><span class=\"num\">Q<sub>1</sub> + Q<sub>2</sub> + Q<sub>3</sub> + Q<sub>4</sub></span><span class=\"den\">4</span></span> ≤ MCL; &nbsp;&nbsp; Feed (gpd) = <span class=\"math-frac\"><span class=\"num\">Q<sub>MGD</sub> · Dose · 8.34</span><span class=\"den\">SG · 8.34 · Purity</span></span>",
+      "alt": "LSI < 0: water is undersaturated and corrosive; LSI > 0: water is supersaturated and scale-forming.",
+      "ref": "NCEES Handbook v2.2, Section 4.5.1 & 4.6.2: Corrosion Control & Chemical Dosing",
+      "topic": "Drinking Water Distribution & Treatment",
+      "notes": "Stage 2 DBP rule sets MCLs at 80 µg/L for TTHM and 60 µg/L for HAA5 based on the 4-quarter Locational Running Annual Average."
+    },
+    {
+      "name": "Harmon Sewer Peaking Factor, Kirschmer Bar Screen & Trickling Filter",
+      "eq": "M = 1 + <span class=\"math-frac\"><span class=\"num\">14</span><span class=\"den\">4 + <span class=\"math-sqrt\">√<span class=\"radicand\">P</span></span></span></span>; &nbsp;&nbsp; h<sub>L</sub> = β(<span class=\"math-frac\"><span class=\"num\">w</span><span class=\"den\">b</span></span>)<sup>4/3</sup>(<span class=\"math-frac\"><span class=\"num\">V<sup>2</sup></span><span class=\"den\">2g</span></span>)sinθ; &nbsp;&nbsp; E<sub>1</sub> = <span class=\"math-frac\"><span class=\"num\">100</span><span class=\"den\">1 + 0.0561<span class=\"math-sqrt\">√<span class=\"radicand\"><span class=\"math-frac\"><span class=\"num\">W</span><span class=\"den\">V · F</span></span></span></span></span></span>",
+      "alt": "Trickling Filter Recirculation Factor: F = <span class=\"math-frac\"><span class=\"num\">1 + R</span><span class=\"den\">[1 + 0.1 R]<sup>2</sup></span></span> where R = <span class=\"math-frac\"><span class=\"num\">Q<sub>r</sub></span><span class=\"den\">Q</span></span>",
+      "ref": "NCEES Handbook v2.2, Section 4.6.4: Collection, Preliminary & Attached Growth",
+      "topic": "Wastewater Collection & Treatment",
+      "notes": "In Harmon's formula, population P is entered in thousands. In the NRC trickling filter equation, W is in lb BOD5/day and V is in acre-ft."
+    },
+    {
+      "name": "Aeration Blower Sizing (SCFM), Nitrification & Sludge Thickening",
+      "eq": "AOR = Q(S<sub>0</sub> - S)8.34 - 1.42 P<sub>x</sub> + 4.57 Q(ΔNH<sub>4-N</sub>)8.34; &nbsp;&nbsp; SCFM = <span class=\"math-frac\"><span class=\"num\">SOTR</span><span class=\"den\">1,440 × SOTE × 0.0174</span></span>",
+      "alt": "Sludge Thickening Volume Conservation: V<sub>1</sub> · S<sub>1</sub> = V<sub>2</sub> · S<sub>2</sub>; &nbsp;&nbsp; Alkalinity Consumed = 7.14 × (ΔNH<sub>4-N</sub>)",
+      "ref": "NCEES Handbook v2.2, Section 4.6.4: Aeration, BNR & Biosolids",
+      "topic": "Wastewater Collection & Treatment",
+      "notes": "Nitrification requires 4.57 lb O<sub>2</sub> and consumes 7.14 lb CaCO<sub>3</sub> alkalinity per lb of ammonia-N oxidized to nitrate."
+    },
+    {
+      "name": "Limit of Economic Haul, Equipment Productivity & Trench Dewatering",
+      "eq": "LEH = FHD + (<span class=\"math-frac\"><span class=\"num\">C<sub>borrow</sub></span><span class=\"den\">C<sub>overhaul</sub></span></span>) × 100 ft; &nbsp;&nbsp; CCY/hr = <span class=\"math-frac\"><span class=\"num\">16.3 · W<sub>eff</sub> · S<sub>mph</sub> · L<sub>in</sub> · Eff</span><span class=\"den\">P</span></span>",
+      "alt": "Trench Dewatering (2-sided unconfined): Q<sub>total</sub> = 2 · L · <span class=\"math-frac\"><span class=\"num\">K(H<sup>2</sup> - h<sub>w</sub><sup>2</sup>)</span><span class=\"den\">2 R<sub>0</sub></span></span>; &nbsp;&nbsp; Curvature & Refraction: h<sub>cr</sub> = 0.0206 M<sup>2</sup>",
+      "ref": "NCEES Handbook v2.2, Section 1.2, 2.1 & 4.4: Sitework, Surveying & Dewatering",
+      "topic": "Project Sitework",
+      "notes": "When haul distance exceeds LEH, it is more economical to waste excavated cut and borrow from an off-site pit."
+    }
+  ],
+  "sectionApproaches": {
+    "Project Planning": {
+      "code": "Section 1",
+      "examWeight": "4–6 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Sections 1.2 (Construction) & 1.3 (Engineering Economics)",
+      "overview": "Covers engineering economics (Present Worth, Annual Equivalent, B/C Ratio, Capitalized Cost), Critical Path Method (CPM) network scheduling & crashing, and earthwork swell/shrinkage quantity takeoffs.",
+      "setupSteps": [
+        "<strong>Step 1 — Draw the Cash-Flow or Network Diagram:</strong> For economics, map Year 0 capital cost (<i>P</i>), recurring annual O&amp;M (<i>A</i>), and terminal salvage value (<i>F</i>) over common analysis horizon <i>n</i>. For scheduling, trace all network paths from Start to Finish.",
+        "<strong>Step 2 — Convert Soil States via Bank Volume (BCY):</strong> Always use undisturbed Bank Cubic Yards (BCY) as your pivot: <i>V</i><sub>BCY</sub> = <span class=\"math-frac\"><span class=\"num\"><i>V</i><sub>CCY</sub></span><span class=\"den\">1 − Shrinkage</span></span> and <i>V</i><sub>LCY</sub> = <i>V</i><sub>BCY</sub> × (1 + Swell).",
+        "<strong>Step 3 — Select the Exact Factor Formula:</strong> Use (<i>P</i>/<i>A</i>, <i>i</i>, <i>n</i>) to bring annual O&amp;M to Present Worth, or (<i>A</i>/<i>P</i>, <i>i</i>, <i>n</i>) to annualize upfront capital investment for EUAC and B/C ratios.",
+        "<strong>Step 4 — Check Salvage Signs &amp; Float Rules:</strong> Salvage value is a positive cash inflow (reduces net cost). On CPM networks, Critical Path has Total Float <i>TF</i> = <i>LS</i> − <i>ES</i> = 0."
+      ],
+      "unitTraps": "Never add undiscounted annual O&amp;M directly to initial capital cost. When crashing schedules, always crash the critical path activity with the lowest cost slope ($/day) first."
+    },
+    "Soil Mechanics": {
+      "code": "Section 2",
+      "examWeight": "3–5 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Sections 3.1–3.5 (Geotechnical Engineering)",
+      "overview": "Covers 3-phase soil weight-volume relationships, effective stress with groundwater, Darcy permeability tests, Terzaghi consolidation settlement & time rate, Rankine lateral earth pressures, and bearing capacity.",
+      "setupSteps": [
+        "<strong>Step 1 — Anchor Phase Relations with <i>S·e</i> = <i>w·G</i><sub>s</sub>:</strong> In saturated soils (<i>S</i> = 1.0), void ratio is immediately <i>e</i> = <i>w·G</i><sub>s</sub>. Always compute dry unit weight γ<sub>d</sub> = <span class=\"math-frac\"><span class=\"num\">γ<sub>total</sub></span><span class=\"den\">1 + <i>w</i></span></span> first when given wet weight and moisture content.",
+        "<strong>Step 2 — Separate Total Stress, Pore Pressure, and Effective Stress:</strong> Compute total overburden stress σ = ∑(γ<sub><i>i</i></sub>·<i>z</i><sub><i>i</i></sub>) from ground surface down, subtract hydrostatic pore pressure <i>u</i> = γ<sub>w</sub>·<i>z</i><sub>w</sub> below the water table, and get σ′ = σ − <i>u</i>.",
+        "<strong>Step 3 — Check Drainage Path <i>H</i><sub>dr</sub> in Consolidation:</strong> For double-drained clay layers (sand above and below), <i>H</i><sub>dr</sub> = <span class=\"math-frac\"><span class=\"num\"><i>H</i></span><span class=\"den\">2</span></span>. For single-drained clay (impermeable rock boundary), <i>H</i><sub>dr</sub> = <i>H</i>.",
+        "<strong>Step 4 — Distinguish Active, Passive, and At-Rest Walls:</strong> Yielding retaining walls use Rankine <i>K</i><sub>a</sub> = tan<sup>2</sup>(45° − <span class=\"math-frac\"><span class=\"num\">φ′</span><span class=\"den\">2</span></span>); rigid basement walls use Jaky at-rest <i>K</i><sub>0</sub> = 1 − sin φ′. Water pressure ALWAYS acts with <i>K</i> = 1.0!"
+      ],
+      "unitTraps": "In USCS units, γ<sub>w</sub> = 62.4 lb/ft<sup>3</sup>. Primary consolidation settlement uses base-10 logarithm (log<sub>10</sub>), whereas falling-head permeability uses natural log (ln)."
+    },
+    "Materials": {
+      "code": "Section 3",
+      "examWeight": "4–6 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Sections 1.5 (Construction Materials) & 3.1 (Soil Classification)",
+      "overview": "Covers USCS and AASHTO soil classification (Casagrande plasticity chart A-line, Cu and Cc), Portland cement concrete mix design (w/c ratio, batch yield, slump, air entrainment), and pressure pipe ratings (PVC, HDPE, DIP, RCP).",
+      "setupSteps": [
+        "<strong>Step 1 — Check #200 Sieve (0.075 mm) First for Soil Classification:</strong> If &gt; 50% passes #200, it is fine-grained (use Liquid Limit <i>LL</i> and Plasticity Index <i>PI</i> = <i>LL</i> − <i>PL</i> against the A-Line <i>PI</i><sub>A</sub> = 0.73(<i>LL</i> − 20)). If &lt; 50% passes #200, it is coarse-grained (check #4 sieve for Gravel vs. Sand, then evaluate <i>C</i><sub>u</sub> and <i>C</i><sub>c</sub>).",
+        "<strong>Step 2 — Base Concrete Mix Adjustments on SSD Aggregate State:</strong> Free surface moisture above Saturated Surface-Dry (SSD) adds water to the batch; aggregate absorption below SSD subtracts water from the batch.",
+        "<strong>Step 3 — Use Dimension Ratio (<i>DR</i>) for Thermoplastic Pipes:</strong> For AWWA C900 PVC and PE4710 HDPE pipe, working pressure rating is <i>PR</i> = <span class=\"math-frac\"><span class=\"num\">2·<i>HDS</i></span><span class=\"den\"><i>DR</i> − 1</span></span>, where <i>DR</i> = <span class=\"math-frac\"><span class=\"num\"><i>D</i><sub>o</sub></span><span class=\"den\"><i>t</i></span></span>.",
+        "<strong>Step 4 — Convert RCP D-Load to Field Trench Strength:</strong> Required 3-edge bearing strength <i>TEB</i> = <span class=\"math-frac\"><span class=\"num\"><i>W</i><sub>field</sub></span><span class=\"den\"><i>B</i><sub>f</sub></span></span>, and D-Load = <span class=\"math-frac\"><span class=\"num\"><i>TEB</i></span><span class=\"den\"><i>D</i><sub>inside</sub> (ft)</span></span>."
+      ],
+      "unitTraps": "Water weighs 8.34 lb/gal (62.4 lb/ft<sup>3</sup>). 1 cubic yard of concrete = 27 ft<sup>3</sup>. Do NOT include the #200 sieve when summing cumulative percent retained for Fineness Modulus (FM)."
+    },
+    "Analysis and Design": {
+      "code": "Section 4",
+      "examWeight": "6–9 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Sections 4.1, 4.2, 4.5 & 4.6 (Hydraulic & Process Analysis)",
+      "overview": "Covers conservative and 1st-order non-conservative river mixing mass balances, clarifier Surface Overflow Rate (SOR), Solids Loading Rate (SLR), Weir Loading Rate (WLR), weirs, flumes, Venturi/orifice meters, Stokes settling, and Camp velocity gradient (G).",
+      "setupSteps": [
+        "<strong>Step 1 — Draw a Control Volume for Mass Balances:</strong> At any stream mixing junction, downstream flow is <i>Q</i><sub>down</sub> = <i>Q</i><sub>stream</sub> + <i>Q</i><sub>eff</sub>, and mixed concentration is <i>C</i><sub>mix</sub> = <span class=\"math-frac\"><span class=\"num\"><i>Q</i><sub>stream</sub><i>C</i><sub>stream</sub> + <i>Q</i><sub>eff</sub><i>C</i><sub>eff</sub></span><span class=\"den\"><i>Q</i><sub>stream</sub> + <i>Q</i><sub>eff</sub></span></span>.",
+        "<strong>Step 2 — Separate Primary vs. Secondary Clarifier Flows:</strong> Primary clarifier Surface Overflow Rate <i>SOR</i> = <span class=\"math-frac\"><span class=\"num\"><i>Q</i></span><span class=\"den\"><i>A</i><sub>plan</sub></span></span> uses forward flow <i>Q</i> only (depth does not affect SOR). Secondary clarifier Solids Loading Rate <i>SLR</i> MUST include Return Activated Sludge flow: Solids = (<i>Q</i> + <i>Q</i><sub>RAS</sub>) × <i>MLSS</i> × 8.34.",
+        "<strong>Step 3 — Match Weir &amp; Flume Exponents:</strong> Rectangular suppressed/contracted weirs scale with <i>H</i><sup>1.5</sup> (<i>Q</i> = 3.33·<i>L</i>·<i>H</i><sup>1.5</sup>), whereas 90° V-notch weirs scale with <i>H</i><sup>2.5</sup> (<i>Q</i> = 2.50·<i>H</i><sup>2.5</sup>).",
+        "<strong>Step 4 — Convert Power to ft·lb/s for Mixing Gradient <i>G</i>:</strong> In USCS units, multiply horsepower by 550 ft·lb/(s·hp) before plugging into <i>G</i> = <span class=\"math-sqrt\">√<span class=\"radicand\"><span class=\"math-frac\"><span class=\"num\"><i>P</i></span><span class=\"den\">μ·<i>V</i></span></span></span></span>."
+      ],
+      "unitTraps": "Always remember the 'Pound Formula': Mass (lb/day) = Flow (MGD) × Concentration (mg/L) × 8.34. And 1 MGD = 1.547 cfs = 694.4 gpm."
+    },
+    "Hydraulics-Closed Conduit": {
+      "code": "Section 5",
+      "examWeight": "7–11 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Section 4.1 (Closed Conduit Hydraulics & Pumps)",
+      "overview": "Covers Energy & Hydraulic Grade Lines (EGL/HGL), Darcy-Weisbach & Hazen-Williams friction losses, series/parallel pipe networks, pump Total Dynamic Head (TDH), Brake & Wire-to-Water Horsepower, Pump Affinity Laws, NPSHa cavitation, water hammer surges, and pipe thrust blocks.",
+      "setupSteps": [
+        "<strong>Step 1 — Write the Extended Bernoulli Energy Equation from Suction to Discharge:</strong> <i>z</i><sub>1</sub> + <span class=\"math-frac\"><span class=\"num\"><i>P</i><sub>1</sub></span><span class=\"den\">γ</span></span> + <span class=\"math-frac\"><span class=\"num\"><i>V</i><sub>1</sub><sup>2</sup></span><span class=\"den\">2<i>g</i></span></span> + <i>TDH</i> = <i>z</i><sub>2</sub> + <span class=\"math-frac\"><span class=\"num\"><i>P</i><sub>2</sub></span><span class=\"den\">γ</span></span> + <span class=\"math-frac\"><span class=\"num\"><i>V</i><sub>2</sub><sup>2</sup></span><span class=\"den\">2<i>g</i></span></span> + <i>h</i><sub>f</sub> + <i>h</i><sub>m</sub>.",
+        "<strong>Step 2 — Check Pipe Units in Hazen-Williams:</strong> If flow <i>Q</i> is in cfs and diameter <i>D</i> is in feet, use <i>h</i><sub>f</sub> = <span class=\"math-frac\"><span class=\"num\">4.73·<i>L</i>·<i>Q</i><sup>1.852</sup></span><span class=\"den\"><i>C</i><sup>1.852</sup>·<i>D</i><sup>4.87</sup></span></span>. If <i>Q</i> is in gpm and <i>d</i> is in inches, use constant 10.44.",
+        "<strong>Step 3 — Track Pump Efficiency Stages:</strong> Water Horsepower <i>WHP</i> = <span class=\"math-frac\"><span class=\"num\"><i>Q</i> (gpm) × <i>TDH</i> (ft) × <i>SG</i></span><span class=\"den\">3,960</span></span>. Divide by η<sub>pump</sub> for Brake HP, and divide by (η<sub>pump</sub> × η<sub>motor</sub>) for electrical Wire-to-Water HP.",
+        "<strong>Step 4 — Check Suction Lift Sign in <i>NPSH</i><sub>a</sub>:</strong> <i>NPSH</i><sub>a</sub> = <i>H</i><sub>barometric</sub> ± <i>z</i><sub>static</sub> − <i>h</i><sub>f,suction</sub> − <i>H</i><sub>vapor</sub>. Subtract <i>z</i><sub>static</sub> when the pump is located ABOVE the suction reservoir water surface!"
+      ],
+      "unitTraps": "1 psi = 2.31 ft of water (at SG = 1.0). In thrust block calculations, <i>F</i><sub>T</sub> = 2·<i>P</i>·<i>A</i>·sin(<span class=\"math-frac\"><span class=\"num\">θ</span><span class=\"den\">2</span></span>) requires pressure <i>P</i> in psi and pipe area <i>A</i> in in<sup>2</sup> (or psf and ft<sup>2</sup>)."
+    },
+    "Hydraulics-Open Channel": {
+      "code": "Section 6",
+      "examWeight": "7–11 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Section 4.2 (Open Channel Hydraulics)",
+      "overview": "Covers Manning's uniform flow equation, normal depth, specific energy, critical depth, Froude number regimes, hydraulic jumps & energy dissipation, circular sewer partial-flow elements, gradually varied flow profiles (M1, M2, S1), culverts, and HEC-22 street gutter spread.",
+      "setupSteps": [
+        "<strong>Step 1 — Compute Geometric Elements First:</strong> For a trapezoid with bottom width <i>b</i> and side slope <i>z</i> (<i>z</i>H:1V), Area <i>A</i> = (<i>b</i> + <i>z·y</i>)<i>y</i>, Wetted Perimeter <i>P</i> = <i>b</i> + 2<i>y</i><span class=\"math-sqrt\">√<span class=\"radicand\">1 + <i>z</i><sup>2</sup></span></span>, Top Width <i>T</i> = <i>b</i> + 2<i>z·y</i>, and Hydraulic Radius <i>R</i><sub>h</sub> = <span class=\"math-frac\"><span class=\"num\"><i>A</i></span><span class=\"den\"><i>P</i></span></span>.",
+        "<strong>Step 2 — Check Flow Regime with Froude Number:</strong> <i>Fr</i> = <span class=\"math-frac\"><span class=\"num\"><i>V</i></span><span class=\"den\"><span class=\"math-sqrt\">√<span class=\"radicand\"><i>g·D</i><sub>h</sub></span></span></span></span> where hydraulic depth <i>D</i><sub>h</sub> = <span class=\"math-frac\"><span class=\"num\"><i>A</i></span><span class=\"den\"><i>T</i></span></span>. <i>Fr</i> &lt; 1 is Subcritical (downstream control); <i>Fr</i> = 1 is Critical; <i>Fr</i> &gt; 1 is Supercritical (upstream control).",
+        "<strong>Step 3 — Distinguish Alternate Depths vs. Conjugate (Sequent) Depths:</strong> Alternate depths share the same Specific Energy <i>E</i> = <i>y</i> + <span class=\"math-frac\"><span class=\"num\"><i>V</i><sup>2</sup></span><span class=\"den\">2<i>g</i></span></span> (smooth transition). Conjugate depths across a Hydraulic Jump share the same Specific Force (momentum) and follow <span class=\"math-frac\"><span class=\"num\"><i>y</i><sub>2</sub></span><span class=\"den\"><i>y</i><sub>1</sub></span></span> = <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span>(<span class=\"math-sqrt\">√<span class=\"radicand\">1 + 8<i>Fr</i><sub>1</sub><sup>2</sup></span></span> − 1).",
+        "<strong>Step 4 — Use Partial-Flow Ratios for Circular Conduits:</strong> A half-full circular pipe (<span class=\"math-frac\"><span class=\"num\"><i>d</i></span><span class=\"den\"><i>D</i></span></span> = 0.50) has <i>A</i> = <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span><i>A</i><sub>full</sub> and <i>R</i><sub>h</sub> = <span class=\"math-frac\"><span class=\"num\"><i>D</i></span><span class=\"den\">4</span></span> (same <i>R</i><sub>h</sub> and velocity as a full pipe!)."
+      ],
+      "unitTraps": "In USCS units, Manning's equation MUST include the 1.486 factor: <i>Q</i> = <span class=\"math-frac\"><span class=\"num\">1.486</span><span class=\"den\"><i>n</i></span></span><i>A·R</i><sub>h</sub><sup>2/3</sup><i>S</i><sup>1/2</sup>. The relation <i>y</i><sub>c</sub> = (<span class=\"math-frac\"><span class=\"num\"><i>q</i><sup>2</sup></span><span class=\"den\"><i>g</i></span></span>)<sup>1/3</sup> and <i>E</i><sub>min</sub> = 1.5<i>y</i><sub>c</sub> applies ONLY to rectangular channels!"
+    },
+    "Hydrology": {
+      "code": "Section 7",
+      "examWeight": "8–12 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Section 4.3 (Hydrology & Stormwater)",
+      "overview": "Covers Rational Method peak runoff, IDF curves, Time of Concentration (NRCS sheet flow & Kirpich), NRCS (SCS) Curve Number runoff depth & volume, Unit Hydrographs, Muskingum flood routing, Horton/Green-Ampt infiltration, flood return period binomial risk, and Water Quality Volume (WQv).",
+      "setupSteps": [
+        "<strong>Step 1 — Match Storm Duration to Time of Concentration (<i>t</i><sub>c</sub>):</strong> In the Rational Method (<i>Q</i> = <i>C</i><sub>f</sub>·<i>C·I·A</i>), sum all travel times along the longest hydraulic path to find <i>t</i><sub>c</sub>, then read rainfall intensity <i>I</i> from the IDF curve at duration <i>t</i><sub>d</sub> = <i>t</i><sub>c</sub>.",
+        "<strong>Step 2 — Partition Rainfall in the NRCS Curve Number Method:</strong> First compute maximum soil retention <i>S</i> = <span class=\"math-frac\"><span class=\"num\">1,000</span><span class=\"den\"><i>CN</i></span></span> − 10 (inches). Check that rainfall <i>P</i> &gt; 0.2<i>S</i>, then compute direct runoff depth <i>Q</i> = <span class=\"math-frac\"><span class=\"num\">(<i>P</i> − 0.2<i>S</i>)<sup>2</sup></span><span class=\"den\"><i>P</i> + 0.8<i>S</i></span></span> (inches).",
+        "<strong>Step 3 — Convert Runoff Depth (inches) to Volume (acre-ft or ft<sup>3</sup>):</strong> Multiply runoff depth <i>Q</i> (in inches) by watershed area <i>A</i> (in acres) and divide by 12 in/ft to get Volume in acre-feet (1 acre = 43,560 ft<sup>2</sup>).",
+        "<strong>Step 4 — Use Binomial Probability for Multi-Year Flood Risk:</strong> Annual exceedance probability is <i>p</i> = <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\"><i>T</i></span></span>. The probability that a <i>T</i>-year flood occurs at least once in <i>n</i> years is Risk = 1 − (1 − <span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\"><i>T</i></span></span>)<sup><i>n</i></sup>."
+      ],
+      "unitTraps": "In Kirpich's <i>t</i><sub>c</sub> equation and HEC-22 gutter equations, enter slope <i>S</i> in ft/ft (decimal), NOT percent. In the Schueler <i>WQ</i><sub>v</sub> equation (<i>R</i><sub>v</sub> = 0.05 + 0.009·<i>I</i>), enter imperviousness <i>I</i> as a whole percentage (e.g., 60 for 60%)."
+    },
+    "Groundwater and Wells": {
+      "code": "Section 8",
+      "examWeight": "4–6 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Section 4.4 (Groundwater & Well Hydraulics)",
+      "overview": "Covers Darcy's law & actual pore seepage velocity, aquifer transmissivity & storativity, Thiem steady confined radial flow, Dupuit steady unconfined radial flow, Theis & Cooper-Jacob transient well drawdown, well interference superposition, 2D seepage flow nets, and Ghyben-Herzberg saltwater intrusion.",
+      "setupSteps": [
+        "<strong>Step 1 — Distinguish Darcy Velocity vs. Actual Seepage Velocity:</strong> Darcy discharge velocity <i>v</i> = <span class=\"math-frac\"><span class=\"num\"><i>Q</i></span><span class=\"den\"><i>A</i></span></span> = <i>K·i</i> is a superficial velocity across the gross area. True pore seepage velocity for contaminant travel time is <i>v</i><sub>s</sub> = <span class=\"math-frac\"><span class=\"num\"><i>K·i</i></span><span class=\"den\"><i>n</i><sub>e</sub></span></span>.",
+        "<strong>Step 2 — Identify Confined (Thiem) vs. Unconfined (Dupuit) Well Hydraulics:</strong> Confined aquifers have constant thickness <i>b</i> (transmissivity <i>T</i> = <i>K·b</i>) and use linear drawdown difference (<i>s</i><sub>1</sub> − <i>s</i><sub>2</sub>). Unconfined aquifers have a sloping water table and use the difference of SQUARED saturated heads (<i>h</i><sub>2</sub><sup>2</sup> − <i>h</i><sub>1</sub><sup>2</sup>).",
+        "<strong>Step 3 — Superpose Drawdowns Linearly for Multiple Wells:</strong> In confined aquifers, total drawdown at any observation point from multiple pumping wells is the algebraic sum of individual drawdowns: <i>s</i><sub>total</sub> = <i>s</i><sub>A</sub> + <i>s</i><sub>B</sub>.",
+        "<strong>Step 4 — Check Flow Net Shape Factor (<span class=\"math-frac\"><span class=\"num\"><i>N</i><sub>f</sub></span><span class=\"den\"><i>N</i><sub>d</sub></span></span>):</strong> Seepage under a dam per unit width is <i>q</i> = <i>K·H</i>·(<span class=\"math-frac\"><span class=\"num\"><i>N</i><sub>f</sub></span><span class=\"den\"><i>N</i><sub>d</sub></span></span>), where <i>H</i> is net head difference between upstream and downstream pools."
+      ],
+      "unitTraps": "1 ft<sup>3</sup> = 7.4805 gallons, and 1 day = 1,440 minutes (so 1 gpm = 192.5 ft<sup>3</sup>/day). Always pair observation well radii properly: closer well <i>r</i><sub>1</sub> has larger drawdown <i>s</i><sub>1</sub>, but smaller saturated thickness <i>h</i><sub>1</sub>."
+    },
+    "Surface Water & Groundwater Quality": {
+      "code": "Section 9",
+      "examWeight": "5–8 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Section 4.5 (Environmental & Water Quality)",
+      "overview": "Covers Streeter-Phelps dissolved oxygen sag curves, critical time & critical DO deficit, BOD5 vs. Ultimate BOD kinetics, Arrhenius temperature corrections, nitrogenous oxygen demand (NBOD), Clean Water Act TMDLs, Henry's law partitioning, and groundwater contaminant retardation.",
+      "setupSteps": [
+        "<strong>Step 1 — Mix River &amp; Effluent Conditions at <i>x</i> = 0 First:</strong> Before applying Streeter-Phelps, compute the mixed initial ultimate BOD (<i>L</i><sub>0</sub>) and mixed initial DO deficit (<i>D</i><sub>0</sub> = <i>DO</i><sub>sat</sub> − <i>DO</i><sub>mix</sub>) immediately downstream of the outfall.",
+        "<strong>Step 2 — Convert <i>BOD</i><sub>5</sub> to Ultimate <i>BOD</i><sub>u</sub> (<i>L</i><sub>0</sub>):</strong> Streeter-Phelps requires Ultimate BOD! Convert 5-day BOD using <i>L</i><sub>0</sub> = <span class=\"math-frac\"><span class=\"num\"><i>BOD</i><sub>5</sub></span><span class=\"den\">1 − <i>e</i><sup>−5<i>k</i></sup></span></span>.",
+        "<strong>Step 3 — Adjust Rate Constants for Stream Temperature:</strong> Use <i>k</i><sub>T</sub> = <i>k</i><sub>20</sub>·θ<sup><i>T</i> − 20</sup>, with θ = 1.047 for biological deoxygenation (<i>k</i><sub>d</sub>) and θ = 1.024 for atmospheric reaeration (<i>k</i><sub>r</sub>).",
+        "<strong>Step 4 — Account for Soil Sorption Retardation in Aquifers:</strong> Retardation factor <i>R</i><sub>d</sub> = 1 + (<span class=\"math-frac\"><span class=\"num\">ρ<sub>b</sub></span><span class=\"den\"><i>n</i></span></span>)<i>K</i><sub>d</sub> slows down the dissolved contaminant plume: <i>v</i><sub>plume</sub> = <span class=\"math-frac\"><span class=\"num\"><i>v</i><sub>seepage</sub></span><span class=\"den\"><i>R</i><sub>d</sub></span></span>."
+      ],
+      "unitTraps": "Check whether BOD rate constant <i>k</i> is given in base <i>e</i> or base 10 (<i>k</i><sub>base e</sub> = 2.303 × <i>K</i><sub>base 10</sub>). Remember that Minimum River DO = <i>DO</i><sub>sat</sub> − <i>D</i><sub>c</sub>."
+    },
+    "Drinking Water Distribution & Treatment": {
+      "code": "Section 10",
+      "examWeight": "6–9 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Sections 4.6.1–4.6.3 (Water Treatment & Distribution)",
+      "overview": "Covers chemical dosing & metering pumps, alum coagulation alkalinity consumption, lime-soda ash softening (CH vs. NCH), rapid/flocculant/granular filtration & backwashing, membrane filtration (UF/RO) mass balances, disinfection CT compliance & baffling factors, GAC adsorption, air stripping, LSI corrosion, and distribution storage.",
+      "setupSteps": [
+        "<strong>Step 1 — Account for Solution Purity &amp; Specific Gravity in Liquid Chemical Feeds:</strong> Active dry chemical mass (lb/day) = <i>Q</i> (MGD) × Dose (mg/L) × 8.34. Divide by (<i>SG</i> × 8.34 lb/gal × Purity fraction) to get liquid metering pump rate in gal/day.",
+        "<strong>Step 2 — Partition Carbonate vs. Non-Carbonate Hardness (as CaCO<sub>3</sub>):</strong> If Total Hardness (<i>TH</i>) &gt; Total Alkalinity (<i>TA</i>), then Carbonate Hardness <i>CH</i> = <i>TA</i> and Non-Carbonate Hardness <i>NCH</i> = <i>TH</i> − <i>TA</i>. If <i>TH</i> ≤ <i>TA</i>, then <i>CH</i> = <i>TH</i> and <i>NCH</i> = 0.",
+        "<strong>Step 3 — Use Effective Contact Time <i>t</i><sub>10</sub> for Disinfection <i>CT</i>:</strong> Never use theoretical detention time <i>T</i> = <span class=\"math-frac\"><span class=\"num\"><i>V</i></span><span class=\"den\"><i>Q</i></span></span> directly in <i>CT</i> compliance; multiply by the baffling factor (<i>BF</i> = <span class=\"math-frac\"><span class=\"num\"><i>t</i><sub>10</sub></span><span class=\"den\"><i>T</i></span></span>) so that <i>t</i><sub>10</sub> = <i>T</i> × <i>BF</i>.",
+        "<strong>Step 4 — Sum All Three Components for Distribution Tank Storage:</strong> Total Tank Volume = Equalizing Volume + Fire Flow Volume (<i>Q</i><sub>fire</sub> × Duration) + Emergency Reserve."
+      ],
+      "unitTraps": "1 meq/L of hardness or alkalinity = 50 mg/L as CaCO<sub>3</sub>. Equivalence weights as CaCO<sub>3</sub>: Ca<sup>2+</sup> = 20.0, Mg<sup>2+</sup> = 12.2, Na<sup>+</sup> = 23.0, HCO<sub>3</sub><sup>−</sup> = 61.0."
+    },
+    "Wastewater Collection & Treatment": {
+      "code": "Section 11",
+      "examWeight": "7–11 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Section 4.6.4 (Wastewater Collection & Treatment)",
+      "overview": "Covers sanitary sewer peaking factors (Harmon) & self-cleansing slopes, lift station wet well cycle sizing, grit chambers, primary clarifier sludge mass balance, activated sludge F:M ratio & MCRT (sludge age), Monod kinetics, aeration blower SCFM sizing, nitrification/denitrification stoichiometry, trickling filters (NRC), and anaerobic digestion (Van Kleeck).",
+      "setupSteps": [
+        "<strong>Step 1 — Use Volatile Biomass (MLVSS) for Activated Sludge F:M Ratio:</strong> Food-to-Microorganism ratio <i>F:M</i> = <span class=\"math-frac\"><span class=\"num\"><i>Q</i> · <i>S</i><sub>0</sub></span><span class=\"den\"><i>V</i> · <i>X</i><sub>v</sub></span></span> divides daily influent BOD<sub>5</sub> load by aeration basin volatile suspended solids (MLVSS).",
+        "<strong>Step 2 — Track All Solids Exiting the System for MCRT (Sludge Age):</strong> Mean Cell Residence Time θ<sub>c</sub> = <span class=\"math-frac\"><span class=\"num\"><i>V</i> · <i>MLSS</i></span><span class=\"den\"><i>Q</i><sub>w</sub>·<i>X</i><sub>w</sub> + <i>Q</i><sub>e</sub>·<i>X</i><sub>e</sub></span></span> divides total system inventory by daily solids wasted PLUS solids lost in the plant effluent.",
+        "<strong>Step 3 — Include Both Carbonaceous and Nitrogenous Oxygen Demand in Aeration:</strong> Total oxygen required = Carbonaceous oxygen demand − 1.42(Biomass wasted) + 4.57(Ammonia-N oxidized). Nitrification also consumes 7.14 mg CaCO<sub>3</sub> alkalinity per mg NH<sub>4</sub>-N oxidized.",
+        "<strong>Step 4 — Conserve Dry Solids Mass Across Sludge Thickeners &amp; Dewatering:</strong> Since dry solids mass is conserved (assuming 100% capture), wet sludge volume varies inversely with percent solids: <i>V</i><sub>1</sub> · (% Solids<sub>1</sub>) = <i>V</i><sub>2</sub> · (% Solids<sub>2</sub>)."
+      ],
+      "unitTraps": "In the NRC trickling filter formula, organic loading <i>W</i> is in lb/day and media volume <i>V</i> MUST be in acre-feet (divide ft<sup>3</sup> by 43,560). Standard air contains 0.0174 lb O<sub>2</sub> per SCFM."
+    },
+    "Project Sitework": {
+      "code": "Section 12",
+      "examWeight": "9–14 Questions",
+      "handbookRef": "NCEES Handbook v2.2, Sections 1.2 (Earthwork & OSHA Safety), 2.1 (Horizontal Curves & Surveying) & 2.2 (Vertical Curves)",
+      "overview": "Covers Average End Area & Prismoidal earthwork volumes, borrow pit grid volumes, mass haul Limit of Economic Haul, OSHA Subpart P excavation slopes & trench shoring pressures, horizontal circular & compound curves, vertical crest/sag curves & sight distance, and survey traverse balancing (Bowditch rule).",
+      "setupSteps": [
+        "<strong>Step 1 — Advance Route Stationing Along the Curve Arc (Never Through PI):</strong> On horizontal circular curves, Point of Tangency is <i>Sta PT</i> = <i>Sta PC</i> + <i>L</i> (where arc length <i>L</i> = <span class=\"math-frac\"><span class=\"num\">π·<i>R</i>·Δ</span><span class=\"den\">180°</span></span>), whereas on parabolic vertical curves, stationing is measured horizontally (1 station = 100 ft).",
+        "<strong>Step 2 — Locate Vertical Curve Turning Points Relative to VPC:</strong> Distance from VPC to the crest high point or sag low point is <i>x</i><sub>turn</sub> = <span class=\"math-frac\"><span class=\"num\">−<i>g</i><sub>1</sub>·<i>L</i></span><span class=\"den\"><i>g</i><sub>2</sub> − <i>g</i><sub>1</sub></span></span>. Then plug <i>x</i><sub>turn</sub> into the parabola elevation equation.",
+        "<strong>Step 3 — Apply OSHA 29 CFR 1926 Subpart P Trench Rules:</strong> Maximum allowable excavation slopes (<20 ft deep): Type A = <span class=\"math-frac\"><span class=\"num\">3</span><span class=\"den\">4</span></span>H:1V (53°); Type B = 1H:1V (45°); Type C = 1<span class=\"math-frac\"><span class=\"num\">1</span><span class=\"den\">2</span></span>H:1V (34°). Trenches ≥ 4 ft deep require ladder egress within 25 ft lateral travel; trenches ≥ 5 ft deep require shoring/shielding.",
+        "<strong>Step 4 — Weight Borrow Pit Grid Corners by Shared Cells:</strong> Multiply corner depths by the number of grid squares touching that stake (1 for exterior corners, 2 for side edges, 3 for reflex corners, 4 for interior stakes): <i>V</i> = <span class=\"math-frac\"><span class=\"num\"><i>A</i><sub>grid</sub></span><span class=\"den\">4 × 27</span></span>(∑<i>h</i><sub>1</sub> + 2∑<i>h</i><sub>2</sub> + 3∑<i>h</i><sub>3</sub> + 4∑<i>h</i><sub>4</sub>)."
+      ],
+      "unitTraps": "Always divide cubic feet (ft<sup>3</sup>) by 27 to get cubic yards (yd<sup>3</sup>). In Bowditch compass traverse adjustment, the correction sign is OPPOSITE to the total misclosure error."
+    }
+  }
+}
